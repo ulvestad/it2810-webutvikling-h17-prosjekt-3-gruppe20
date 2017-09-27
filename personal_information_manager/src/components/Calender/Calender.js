@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class Calender extends Component{
   render(){
     return(
-      <section id="notes" className="bg-light">
+      <section id="calender" className="bg-light">
         <div className="container">
           <div className="row">
             <div className="col-lg-8 mx-auto">
