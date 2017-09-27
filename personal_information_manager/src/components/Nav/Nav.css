@@ -1,0 +1,31 @@
+#navlogo{
+  width: 150px;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+#navtext{
+  color: #a5a5a5;
+  font-size: 16px;
+  margin-top: 10px;
+}
+#navlogoToogle{
+  width: 150px;
+}
+#navtextToogle{
+  display: none;
+}
+
+/* Small screen styling */
+@media(max-width: 500px) {
+  #navtext{
+    display: none;
+  }
+  #navtextToogle{
+    display: initial;
+    margin-left: -10px;
+    /* Centeralign logo when small screen
+    margin-left: auto;
+    margin-right: auto;
+    */
+  }
+}

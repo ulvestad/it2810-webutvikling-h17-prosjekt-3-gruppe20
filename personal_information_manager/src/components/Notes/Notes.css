@@ -1,0 +1,27 @@
+p{
+  margin-bottom: 25px;
+}
+.noteContainer{
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#note{
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 30px;
+  width: 200px;
+  min-height: 150px;
+  height: auto;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #1CC5D4;
+  color: white;
+  float: left;
+}
