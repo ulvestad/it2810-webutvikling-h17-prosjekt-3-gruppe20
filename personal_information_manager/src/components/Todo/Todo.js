@@ -4,11 +4,11 @@ class Todo extends Component{
   render(){
     return(
       <section id="todo" className="bg-light">
-        <div class="container" >
-          <div class="row">
-            <div class="col-lg-8 mx-auto">
+        <div className="container" >
+          <div className="row">
+            <div className="col-lg-8 mx-auto">
               <h2>Todo</h2>
-              <p class="lead">All of your todo’s for today: Friday 22.03.2017</p>
+              <p className="lead">All of your todo’s for today: Friday 22.03.2017</p>
               <br></br>
               <p><strike>[X] Finish this react page</strike></p>
               <p>[ ] Run on the treadmill</p>
