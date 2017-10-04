@@ -10,16 +10,16 @@ class Nav extends Component{
     this.handleHiddenBadge = this.handleHiddenBadge.bind(this);
     this.updateNotificationBadge = this.updateNotificationBadge.bind(this);
     this.state= {
-      isVisible: true
+      visibleBadge: true
     };
   }
 
   //Conditional rendering
   handleVisibleBadge(){
-    this.setState({isVisible:true});
+    this.setState({visibleBadge:true});
   }
   handleHiddenBadge(){
-    this.setState({isVisible:false});
+    this.setState({visibleBadge:false});
   }
   updateNotificationBadge(){
     var firstTimeVisitToday = loadFromLocalStorage(new Date().toDateString());
@@ -31,14 +31,15 @@ class Nav extends Component{
     }
   }
 
+
   getNumberOfAppoitments(){
     return getAppoitments().length;
   }
 
   render(){
-    const isVisible = this.state.isVisible;
+    const visibleBadge = this.state.visibleBadge;
     let badge = null;
-    if(isVisible){
+    if(visibleBadge){
       badge = <a className="nav-link js-scroll-trigger" onClick={this.updateNotificationBadge} href="#notifications">Notfications <span className="badge badge-danger">{this.getNumberOfAppoitments()}</span></a>;
     }else{
       badge = <a className="nav-link js-scroll-trigger" href="#notifications">Notfications</a>;
@@ -55,7 +56,7 @@ class Nav extends Component{
          <div className="collapse navbar-collapse" id="navbarResponsive">
            <ul className="navbar-nav ml-auto">
              <li className="nav-item">
-               <a className="nav-link js-scroll-trigger" href="#calender">Calender</a>
+               <a className="nav-link js-scroll-trigger" href="#calender" onClick={this.closeMenu}>Calender</a>
              </li>
              <li className="nav-item">
                <a className="nav-link js-scroll-trigger" href="#notes">Notes</a>
