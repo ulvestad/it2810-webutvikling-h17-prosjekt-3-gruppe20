@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
-import AddEvent from './AddEvent'
+import EventModal from './EventModal'
 import './Events.css';
+
+/* 
+ * Example component to test the AddEvent component
+ * 
+ * When the modal returns an event, this component adds the event to the 
+ * list of events in the state, and shows the event in the <ul> list.
+ */
 
 class Events extends Component {
   constructor(props) {
@@ -14,13 +21,20 @@ class Events extends Component {
     }
 
     this.state = {
+      showModal: false,
       events: [event],
     }
 
     this.addEvent = this.addEvent.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   addEvent(event) {
+    /* 
+     * The addEvent function should add the event to local storage,
+     * in addition to updating the component state of the callendar
+     * */
 
     var events = this
       .state
@@ -31,7 +45,18 @@ class Events extends Component {
     event['id'] = index;   
     events.push(event);
 
-    this.setState({events: events})
+    this.setState({
+      events: events,
+      showModal: false
+    });
+  }
+
+  openModal() {
+    this.setState({ showModal: true });
+  }
+
+  closeModal() {
+    this.setState({showModal: false});
   }
 
   render() {
@@ -56,7 +81,10 @@ class Events extends Component {
     return (
       <section id="myModal" className="bg-light">
         <div className="container">
-        <AddEvent handleSubmit={this.addEvent} start={slotInfo.start} end={slotInfo.end} />
+        
+        <button type="button" onClick={this.openModal} className="btn">Add Event</button>
+        <EventModal open={this.state.showModal} handleClose={this.closeModal} handleSubmit={this.addEvent} start={slotInfo.start} end={slotInfo.end} />
+        
         <hr />
         <h1>Events</h1>
         <ul>{eventItems}</ul>

@@ -1,25 +1,10 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 
-class AddEvent extends Component { 
+class EventModal extends Component { 
   constructor(props){
     super(props);
-
-    this.state = {
-      modalOpen: false,
-    }
-
-    this.open = this.open.bind(this);
-    this.close = this.close.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  open() {
-    this.setState({modalOpen: true});
-  }
-
-  close() {
-    this.setState({modalOpen: false});
   }
 
   handleSubmit(e) {
@@ -34,7 +19,6 @@ class AddEvent extends Component {
       end: this.props.end
     }
 
-    this.close();
     this.props.handleSubmit(event);
   }
 
@@ -58,7 +42,6 @@ class AddEvent extends Component {
     return timeString
   }
 
-
   render() {
     const timeString = this.makeTimeString(this.props.start, this.props.end);
 
@@ -75,22 +58,16 @@ class AddEvent extends Component {
 
     return (
         <div>
-          <button type="button" onClick={this.open} className="btn">
-            Add Event
-          </button>
-
           <Modal style={modalStyles} 
-            isOpen={this.state.modalOpen}
-            onRequestClose={this.close}>
+            isOpen={this.props.open}
+            onRequestClose={this.props.handleClose}>
 
             <h2>Add event:</h2>
-
             <form action="#" id="form" onSubmit={this.handleSubmit}>
               <input placeholder="Untiteled event" id="title" className="form-control"/>
               <hr />
               <h5>When:</h5> {timeString}
               <hr />
-
               <input type="submit" value="submit" className="btn btn-success"/>
             </form>
           </Modal>
@@ -99,4 +76,4 @@ class AddEvent extends Component {
   }
 }
 
-export default AddEvent; 
+export default EventModal; 
