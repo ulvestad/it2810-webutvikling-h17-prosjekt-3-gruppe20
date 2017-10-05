@@ -9,6 +9,10 @@ BigCalendar.momentLocalizer(moment)
 
 // TODO focus input title text when adding new event
 
+// TODO Drag and drop functionality
+
+// TODO Put styling in own file!
+
 class Calender extends Component{
   constructor (props) {
     super(props)
