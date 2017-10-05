@@ -8,17 +8,10 @@ BigCalendar.momentLocalizer(moment);
 class Calender extends Component{
   constructor (props) {
     super(props)
-
-    // Load stored data, if none create empty list
-    let data = loadFromLocalStorage('events', false)
-    if (!data) data = []
-    else data = data[0]
-
     // set state
     this.state = {
-      events: data
+      events: loadFromLocalStorage('events', [])
     }
-
     // bind functions
     this.handleInputChange = this.handleInputChange.bind(this)
     this.addEvent = this.addEvent.bind(this)
@@ -52,7 +45,7 @@ class Calender extends Component{
       events: [...prev.events, event]
     }));
 
-    storeItem('events', [this.state.events]);
+    storeItem('events', this.state.events);
   }
 
   render(){
