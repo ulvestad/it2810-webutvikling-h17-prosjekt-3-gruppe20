@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import {storeItem, loadFromLocalStorage} from '../../localStorage';
+import {storeItem} from '../../localStorage';
 import List from './List';
 
 class Todo extends Component {
@@ -21,24 +22,24 @@ class Todo extends Component {
     if (textInput.value === '') {
       return null
     };
-    storeItem('todo_' + new Date(), [this.state.value, false]);
+    storeItem('todo_' + new Date(), {value: this.state.value, checked: false});
     textInput.value = '';
   }
 
   render() {
-    const test = Object.keys(localStorage).map(key => {
-      const todoValue = loadFromLocalStorage(key);
-      return <List {...{key, todoValue}}/>
+    const todoList = Object.keys(localStorage).map(key => {
+      return <List key={key} keyName={key}/>
     });
+
+    const date = todoList.length === 0 ? null :
+      <div className="lead">All of your todo’s for <span>{new Date().toDateString()}</span></div>;
 
     return (
       <section id="todo" className="bg-light">
-        <div className="container">
+        <Grid bsClass="container">
           <Row>
-            <div className="col-lg-8 mx-auto">
+            <Col lg={8} className="mx-auto">
               <h2>Todo</h2>
-              <p className="lead">All of your todo’s for today: Friday 22.03.2017</p>
-              <br></br>
               <form onSubmit={this.handleSubmit}>
                 <label>
                   What to do:
@@ -46,10 +47,11 @@ class Todo extends Component {
                 </label>
                 <input type="submit" value="Submit" />
               </form>
-            </div>
-            {test}
+              {date}
+              {todoList}
+            </Col>
           </Row>
-        </div>
+        </Grid>
       </section>
     );
   }

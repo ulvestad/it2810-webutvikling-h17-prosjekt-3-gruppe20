@@ -1,35 +1,31 @@
 import React from "react";
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
+import {storeItem, loadFromLocalStorage} from '../../localStorage';
 
-const List = ({todoValue}) => {
-  const styles = {
-    textDecoration: 'line-through'
-  };
-
-  const isChecked = () => {
-    const checkbox = document.getElementsByTagName('input');
-    if (checkbox.type === 'checkbox') {
-      return checkbox.checked ? true : false;
-    }
-    return false;
-  };
+const List = ({keyName}) => {
+  let todoValue = {};
+  if (keyName.indexOf('todo') !== -1) {
+    todoValue = loadFromLocalStorage(keyName);
+  }
+  const value = todoValue.value;
+  const checked = todoValue.checked;
 
   const changeStorage = () => {
+    storeItem(keyName, {value: value, checked: !checked});
+  };
 
+  const removeItem = () => {
+    localStorage.removeItem(keyName);
   };
 
   return (
-    <Grid fluid={true}>
-      <Row>
-        <Col xs={12} lg={12}>
-          <label>
-            <input onClick={() => changeStorage()} type="checkbox"/> <span style={isChecked() ? styles : null}>{todoValue}</span>
-          </label>
-        </Col>
-      </Row>
-    </Grid>
+    <div className="box">
+      <label onClick={() => changeStorage()}>
+        <input
+          type="checkbox"
+          defaultChecked={checked}/> <span className={checked ? "line" : null}>{value}</span>
+      </label>
+      <span className="x" onClick={() => removeItem()}>x</span>
+    </div>
   );
 };
 
