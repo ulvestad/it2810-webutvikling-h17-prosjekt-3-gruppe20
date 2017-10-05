@@ -1,0 +1,17 @@
+.line {
+  text-decoration: line-through;
+}
+
+.todoMargin {
+  margin-right: 10px;
+}
+
+.allTodos {
+  margin: 10px 0;
+}
+
+.xButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
