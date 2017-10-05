@@ -9,37 +9,33 @@ class Nav extends Component{
     this.handleVisibleBadge = this.handleVisibleBadge.bind(this);
     this.handleHiddenBadge = this.handleHiddenBadge.bind(this);
     this.updateNotificationBadge = this.updateNotificationBadge.bind(this);
-    this.state= {
-      visibleBadge: true
-    };
+    this.state= {isVisible: true};
   }
 
   //Conditional rendering
   handleVisibleBadge(){
-    this.setState({visibleBadge:true});
+    this.setState({isVisible:true});
   }
   handleHiddenBadge(){
-    this.setState({visibleBadge:false});
+    this.setState({isVisible:false});
   }
-  updateNotificationBadge(){
+  updateNotificationBadge(e){
     var firstTimeVisitToday = loadFromLocalStorage(new Date().toDateString());
-    //visited but NOT clicked button
     if(!firstTimeVisitToday){
       var today = new Date().toDateString();
       storeItem(today, true)
-      this.handleHiddenBadge();
+      this.handleHiddenBadge()
     }
   }
-
 
   getNumberOfAppoitments(){
     return getAppoitments().length;
   }
 
   render(){
-    const visibleBadge = this.state.visibleBadge;
+    const isVisible = this.state.isVisible;
     let badge = null;
-    if(visibleBadge){
+    if(isVisible){
       badge = <a className="nav-link js-scroll-trigger" onClick={this.updateNotificationBadge} href="#notifications">Notfications <span className="badge badge-danger">{this.getNumberOfAppoitments()}</span></a>;
     }else{
       badge = <a className="nav-link js-scroll-trigger" href="#notifications">Notfications</a>;
@@ -56,7 +52,7 @@ class Nav extends Component{
          <div className="collapse navbar-collapse" id="navbarResponsive">
            <ul className="navbar-nav ml-auto">
              <li className="nav-item">
-               <a className="nav-link js-scroll-trigger" href="#calender" onClick={this.closeMenu}>Calender</a>
+               <a className="nav-link js-scroll-trigger" href="#calender">Calender</a>
              </li>
              <li className="nav-item">
                <a className="nav-link js-scroll-trigger" href="#notes">Notes</a>

@@ -1,8 +1,8 @@
+
 (function($) {
   "use strict"; // Start of use strict
-
   // Smooth scrolling using jQuery easing
-  $('body').on('click', 'a.js-scroll-trigger[href*="#"]:not([href="#"])', function() {
+  $('document').on('click', 'a.js-scroll-trigger[href*="#"]:not([href="#"])', function(event) {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
       var target = $(this.hash);
       target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
