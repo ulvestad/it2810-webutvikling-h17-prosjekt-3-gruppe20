@@ -17,8 +17,15 @@ class Calender extends Component{
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   handleSubmit(note) {
-    console.log(note);
+
+    note.title = this.capitalize(note.title);
+    note.body = this.capitalize(note.body);
+
     var notes = this.state.notes;
     notes.unshift(note);
 
