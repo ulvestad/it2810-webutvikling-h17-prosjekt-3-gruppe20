@@ -1,0 +1,22 @@
+.line {
+  text-decoration: line-through;
+}
+
+.box {
+  border-style: solid;
+  padding-left: 5px;
+  margin-bottom: 5px;
+}
+
+.x {
+  margin-left: 50px;
+}
+
+.x:hover {
+  cursor: pointer;
+  color: grey;
+}
+
+.x:active {
+  color: blue;
+}

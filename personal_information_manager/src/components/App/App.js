@@ -7,6 +7,7 @@ import '../Header/Header.css';
 import '../Calender/Calender.css';
 import '../Notes/Notes.css';
 import '../Todo/Todo.css';
+import '../Todo/List.css'
 import '../Notifications/Notifications.css';
 
 //Component imports
