@@ -79,7 +79,7 @@ class Calender extends Component{
       id: id,
       title: '',
       start: slotInfo.start,
-      end: slotInfo.end
+      end: slotInfo.end,
     }
     // updates events state with the new event
     this.setState({
@@ -146,13 +146,13 @@ class Calender extends Component{
                 defaultView='month'
                 onSelectEvent={this.openModal}
                 onSelectSlot={this.addEvent}
-              />
+              /
               <EventModal
                 ref="child"
                 show={this.state.showModal}
                 error={this.state.error}
                 modalEvent={this.state.modalEvent}
-                handleSave={this.changeEvent} 
+                handleSave={this.changeEvent}
                 handleRemove={this.removeEvent}
                 handleClose={this.closeModal}
               />
@@ -165,5 +165,3 @@ class Calender extends Component{
 }
 
 export default Calender
-
-

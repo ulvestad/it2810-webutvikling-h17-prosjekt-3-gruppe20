@@ -25,6 +25,8 @@ class Nav extends Component{
       var today = new Date().toDateString();
       storeItem(today, true)
       this.handleHiddenBadge()
+    }else{
+      this.handleHiddenBadge()
     }
   }
 
@@ -35,7 +37,8 @@ class Nav extends Component{
   render(){
     const isVisible = this.state.isVisible;
     let badge = null;
-    if(isVisible){
+    //TODO update number when new appoitnmets are made 
+    if(isVisible && this.getNumberOfAppoitments()>0){
       badge = <a className="nav-link js-scroll-trigger" onClick={this.updateNotificationBadge} href="#notifications">Notfications <span className="badge badge-danger">{this.getNumberOfAppoitments()}</span></a>;
     }else{
       badge = <a className="nav-link js-scroll-trigger" href="#notifications">Notfications</a>;
