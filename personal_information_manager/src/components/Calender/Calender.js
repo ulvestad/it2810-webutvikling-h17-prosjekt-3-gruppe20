@@ -7,12 +7,6 @@ import EventModal from '../Events/EventModal'
 
 BigCalendar.momentLocalizer(moment)
 
-// TODO focus input title text when adding new event
-
-// TODO Drag and drop functionality
-
-// TODO Put styling in own file!
-
 class Calender extends Component{
   constructor (props) {
     super(props)
@@ -42,6 +36,7 @@ class Calender extends Component{
     this.addEvent = this.addEvent.bind(this)
     this.removeEvent = this.removeEvent.bind(this)
     this.changeEvent = this.changeEvent.bind(this)
+    this.validateEvent = this.validateEvent.bind(this)
   }
 
   /* Replaces part of string from head to tale with input */
@@ -51,13 +46,25 @@ class Calender extends Component{
 
   /* Opens modal */
   openModal(event) {
-    this.setState({ showModal: true, modalEvent: event})
-    console.log(this.props.children)
+    this.setState({
+      showModal: true,
+      modalEvent: event
+    }, () => { 
+      this.refs.child.updateState()
+    })
   }
 
   /* Closes modal */
   closeModal() {
-    this.setState({ showModal: false})
+    this.setState({ showModal: false, error: null})
+  }
+
+  validateEvent(start, end) {
+    if (!end && !start) return {bool: true, err: null}
+    if (!end || !start) return {bool: false, err: 'missing one date'}
+    // validate start and end
+    if (end < start) return {bool: false, err:'Start < End'}
+    return {bool: true, err: null}
   }
 
   /* Adds a new element */
@@ -80,7 +87,7 @@ class Calender extends Component{
     }, () => {
       storeItem('events', this.state.events)
     })
-
+    // opens modal
     this.openModal(event)
   }
 
@@ -97,20 +104,25 @@ class Calender extends Component{
 
   /* Change info of specific element */
   changeEvent(changes) {
-    if (!changes) return this.setState({error: 'No changes?'})
-    if (!changes.title) return this.setState({error: 'No title'})
-    //if (!changes.start || !changes.end) return this.setState({error: 'missing one date'})
+
     // find id of event
     const idx = this.state.events.indexOf(this.state.modalEvent)
     // save event
-    const event = {...this.state.events[idx]}
+    let event = {...this.state.events[idx]}
+    event.title = changes.title
     // delete event
     const events = this.state.events.filter(e => e.id !== event.id)
-    // modify event if values changed
-    // TODO add restrictions
-    if (changes.title) event.title = changes.title
-    if (changes.start) event.start = new Date(this.replaceAt(event.start.toString(), 16, 24, changes.start))
-    if (changes.end) event.end = new Date(this.replaceAt(event.end.toString(), 16, 24, changes.end))
+    // change date of event if changed
+    if (typeof changes.start === 'string') {
+      event.start = new Date(this.replaceAt(event.start.toString(), 16, 24, changes.start))
+    }
+    if (typeof changes.end === 'string') {
+      event.end = new Date(this.replaceAt(event.end.toString(), 16, 24, changes.end))
+    }
+    // validates input, returns if error and updates message
+    let {bool, err} = this.validateEvent(event.start, event.end)
+    if (!bool) return this.setState({error: err})
+    
     // set state and store new list
     this.setState({
       events: [...events, event]
@@ -135,8 +147,9 @@ class Calender extends Component{
                 onSelectEvent={this.openModal}
                 onSelectSlot={this.addEvent}
               />
-              <EventModal 
-                open={this.state.showModal}
+              <EventModal
+                ref="child"
+                show={this.state.showModal}
                 error={this.state.error}
                 modalEvent={this.state.modalEvent}
                 handleSave={this.changeEvent} 
