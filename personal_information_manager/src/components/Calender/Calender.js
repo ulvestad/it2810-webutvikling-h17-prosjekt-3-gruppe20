@@ -59,10 +59,11 @@ class Calender extends Component{
     this.setState({ showModal: false, error: null})
   }
 
+  /* Validates the dates start and end */
   validateEvent(start, end) {
+    // validate start and end
     if (!end && !start) return {bool: true, err: null}
     if (!end || !start) return {bool: false, err: 'missing one date'}
-    // validate start and end
     if (end < start) return {bool: false, err:'Start < End'}
     return {bool: true, err: null}
   }
@@ -109,6 +110,7 @@ class Calender extends Component{
     const idx = this.state.events.indexOf(this.state.modalEvent)
     // save event
     let event = {...this.state.events[idx]}
+
     event.title = changes.title
     // delete event
     const events = this.state.events.filter(e => e.id !== event.id)
