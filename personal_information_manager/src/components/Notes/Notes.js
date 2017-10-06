@@ -7,9 +7,16 @@ import {storeItem, loadFromLocalStorage} from '../../localStorage';
 class Calender extends Component{
   constructor(props) {
     super(props);
-    var prevState = loadFromLocalStorage("notes", {modalOpen: false, id: 0, notes: []});
-    prevState.modalOpen = false;
-    this.state = prevState;
+    const emptyState = {
+      modalIsOpen: false, 
+      notes: []
+    }
+    const loadedState = loadFromLocalStorage('notes', emptyState);
+    
+    this.state = {
+      ...loadedState,
+      modalOpen: false
+    }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -22,28 +29,15 @@ class Calender extends Component{
   }
 
   handleSubmit(note) {
-
     note.title = this.capitalize(note.title);
     note.body = this.capitalize(note.body);
-
-    var notes = this.state.notes;
-    notes.unshift(note);
-
-    this.setState(
-      {
-        id: this.state.id + 1,
-        notes: notes
-      }
-    );
-
-    storeItem('notes', this.state);
-    this.closeModal();
+    const notes = [note, ...this.state.notes];
+    this.setState({notes: notes, modalOpen: false}, () => storeItem('notes', this.state));
   }
 
   handleDelete(idToDelete){
-    let notes = this.state.notes.filter(aNote => aNote.id !== idToDelete);
-    this.setState({notes: notes});
-    storeItem('notes', this.state);
+    let notes = this.state.notes.filter((aNote) => aNote.id !== idToDelete);
+    this.setState({notes: notes}, () => storeItem('notes', { notes: notes }));
   }
 
   openModal() {
@@ -54,26 +48,36 @@ class Calender extends Component{
     this.setState({modalOpen: false});
   }
 
-  render(){
+  render() {
+    const notes = this.state.notes.map(note => 
+      <Note key={note.id} 
+            id={note.id} 
+            title={note.title} 
+            body={note.body} 
+            handleDelete={this.handleDelete} />
+    );
 
-    const notes = this.state.notes.map( note => {
-      return <Note key={note.id} id={note.id} title={note.title} body={note.body} handleDelete={this.handleDelete} />
-    });
-
-    console.log(notes);
-
+    const noteId = new Date().getTime()
     return(
       <section id="notes">
         <div className="container">
           <div className="row">
             <div className="col-lg-8 mx-auto">
               <h2>Notes</h2>
-              <p className="lead">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              </p>
-              <NoteModal id={this.state.id+1} open={this.state.modalOpen} handleClose={this.closeModal} handleSubmit={this.handleSubmit}/>
+
+              <blockquote className="blockquote">
+                <p className="mb-0">He listens well who takes notes</p>
+                <footer className="blockquote-footer">
+                  <cite>Dante Alighieri</cite>
+                </footer>
+              </blockquote>
+
+              <NoteModal id={noteId} 
+                  open={this.state.modalOpen}
+                  handleClose={this.closeModal}
+                  handleSubmit={this.handleSubmit} />
               <div className="notesContainer">
-                <AddNote handleClick={this.openModal}/>
+                <AddNote handleClick={this.openModal} />
                 {notes}
               </div>
             </div>

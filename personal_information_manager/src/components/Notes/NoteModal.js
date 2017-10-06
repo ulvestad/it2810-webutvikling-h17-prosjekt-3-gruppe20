@@ -1,67 +1,58 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {FormGroup, FormControl} from 'react-bootstrap';
 import Modal from 'react-modal';
 
-class NoteModal extends Component { 
-  constructor(props){
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const NoteModal = ({id, open, handleClose, handleSubmit}) => { 
+  const getValueFromInput = (e, component, selector) => {
+    const el = e.target.querySelector(`${component}[id="${selector}"]`);
+    return el ? el.value : '';
+   }
 
-  handleSubmit(e) {
-    const title = e
-    .target
-    .querySelector('input[id="title"]')
-    .value;
-
-    const body = e
-    .target
-    .querySelector('textarea[id="body"]')
-    .value;
-
+  const submit = (e) => {
+    const title = getValueFromInput(e, 'input','title');
+    const body = getValueFromInput(e, 'textarea','body')
+    
     const note = {
-      id: this.props.id, 
+      id: id, 
       title: title,
       body: body
     }
-
-    this.props.handleSubmit(note);
-  }
-
-  render() {
-    const modalStyles = {
-      overlay: {
-        zIndex: 10
-      },
-      content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)',
-        backgroundColor       : "#1CC5D4",
-        color                 : "white"
-      }
-    };
-
-    return (
     
-      <Modal 
-        style={modalStyles} 
-        isOpen={this.props.open}
-        onRequestClose={this.props.handleClose} >
-          <form action="#notes" id="form" onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <input type="text" className="form-control" id="title" placeholder="Enter title" />
-            </div>
-            <div className="form-group">
-              <textarea type="text" className="form-control" id="body" rows="2" placeholder="Enter note" />
-            </div>
-            <input type="submit" value="Add" className="btn btn-default"/>
-          </form>
-      </Modal>
-    );
+    handleSubmit(note);
   }
+
+  const modalStyles = {
+    overlay: {
+      zIndex: 10
+    },
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)',
+      backgroundColor       : "#1CC5D4",
+      color                 : "white"
+    }
+  };
+
+  return (
+    <Modal 
+      style={modalStyles} 
+      isOpen={open}
+      onRequestClose={handleClose} >
+        <form action="#notes" id="form" onSubmit={submit}>
+          <FormGroup>
+            <FormControl type="text" id="title" placeholder="Enter title" />
+          </FormGroup>
+          <FormGroup>
+            <textarea type="text" className="form-control" id="body" rows="2" placeholder="Enter note" />
+          </FormGroup>
+          <FormControl type="submit" value="Add" className="btn btn-default" />
+        </form>
+    </Modal>
+  );
 }
 
 export default NoteModal; 

@@ -1,32 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class Note extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleDelete = this.handleDelete.bind(this);
-  }
-  handleDelete(e) {
-    this.props.handleDelete(this.props.id); 
-  }
-  
-  render() {
+const Note = ({id, title, body, handleDelete}) => {
     return (
       <div className="panel panel-default note">
         <div className="panel-heading note-heading">
-          <button type="button" className="close" aria-label="Close" onClick={this.handleDelete}>
+          <button type="button" 
+            className="close" aria-label="Close" 
+            onClick={(e) => handleDelete(id)} >
             <span aria-hidden="true">&times;</span>
           </button>
           <h3 className="panel-title">
-            {this.props.title}
+            {title}
           </h3>
         </div>
         <div className="panel-body">
-          <p>{this.props.body}</p>
+          <p>{body}</p>
         </div>
       </div>
     );
-  }
 }
 
 export default Note;
