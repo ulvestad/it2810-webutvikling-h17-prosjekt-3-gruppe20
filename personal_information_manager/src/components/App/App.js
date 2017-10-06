@@ -9,6 +9,7 @@ import '../Calender/Calender.css';
 import '../Notes/Notes.css';
 import '../Todo/Todo.css';
 import '../Notifications/Notifications.css';
+import '../Events/EventModal.css'
 
 //Component imports
 import Nav from "../Nav/Nav.js";

@@ -12,10 +12,9 @@ class EventModal extends Component {
     this.handleTitle = this.handleTitle.bind(this)
     this.handleStart = this.handleStart.bind(this)
     this.handleEnd = this.handleEnd.bind(this)
-    this.resetState = this.resetState.bind(this)
+    this.updateState = this.updateState.bind(this)
   }
 
-  /* Handles input in new tab text input field */
   handleTitle(e) {
     this.setState({ title: e.target.value })
   }
@@ -28,67 +27,38 @@ class EventModal extends Component {
     this.setState({ end: e.target.value })
   }
 
-  resetState() {
-    this.setState({
-      title: '',
-      start: '',
-      end: ''
-    })
-  }
-
-  // Todo fix
-  makeTimeString(start, end) {
-    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-    var months = ['January','February','March','April','May','June','July','August','September','October','November','December']
-
-    var timeString = ""
-    timeString += days[start.getDay()] + ", "
-    timeString += " " + months[start.getMonth()] + " " + start.getDay() + ", "
-    timeString += start.getHours()+ ":" + start.getMinutes() + " - "
-
-    if (start.getYear() === end.getYear() && start.getDay() === end.getDay()) {
-      timeString += end.getHours()+ ":" + end.getMinutes()
-    } else {
-      timeString += days[end.getDay()] + ", "
-      timeString += " " + months[end.getMonth()] + " " + end.getDay() + ", "
-      timeString += end.getHours()+ ":" + end.getMinutes()
-    }
-    return timeString
+  updateState() {
+    this.setState({...this.props.modalEvent}, () => console.log('state', this.state))
   }
 
   render() {
     if (!this.props.modalEvent) return (<div> </div>)
-    //const timeString = this.makeTimeString(this.props.modalEvent.start, this.props.modalEvent.end)
+    // error div to add if error
+    const error = <div> <label> Error: </label> {this.props.error} </div>
 
+    // Putte i css? fucked up
     const modalStyles = {
-      overlay : {
-        zIndex                : 10
-      },
-      content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)',
-      }
+      overlay:{zIndex:10},
+      content:{top:'50%',left:'50%',right:'auto',bottom:'auto',marginRight:'-50%',transform:'translate(-50%, -50%)'}
     }
-
     return (
       <div>
         <Modal
           style={modalStyles} 
-          isOpen={this.props.open}
+          isOpen={this.props.show}
           onRequestClose={this.props.handleClose}>
 
           <div>
             <h2> Event </h2>
-            <label> title: </label> {this.state.title}
-            <input className="form-control"  id="title" type="text"
-              placeholder={this.state.title} 
-              onChange={this.handleTitle}/>
           </div>
           <hr />
+          <div>
+            <label> title: </label> {this.props.modalEvent.title}
+            <input className="form-control"  id="title" type="text"
+              defaultValue={this.props.modalEvent.title} 
+              placeholder='title'
+              onChange={this.handleTitle}/>
+          </div>
           <div>
             <label> start: </label>
             {this.props.modalEvent.start.toString().substring(0, 15)}
@@ -109,29 +79,18 @@ class EventModal extends Component {
           <div>
             <button 
               className="btn btn-success"
-              onClick={() => {
-                this.props.handleSave(this.state)
-                this.resetState()
-              }}> Save
+              onClick={() => this.props.handleSave(this.state)}> Save
             </button>
             <button
               className="btn btn-danger"
-              onClick={() => {
-                this.props.handleRemove(this.props.modalEvent)
-                this.resetState()
-              }}> Delete 
+              onClick={() => this.props.handleRemove(this.props.modalEvent)}> Delete 
             </button>
             <button 
               className="btn btn-warning"
-              onClick={() => {
-                this.props.handleClose()
-                this.resetState()
-              }}> Close
+              onClick={() => this.props.handleClose()}> Close
             </button>
           </div>
-          <div>
-            {this.props.error}
-          </div>
+          { this.props.error ? error : null }
         </Modal>
       </div>
     )
