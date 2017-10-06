@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import {storeItem, loadFromLocalStorage} from '../../localStorage'
-
 import EventModal from '../Events/EventModal'
 
 BigCalendar.momentLocalizer(moment)
@@ -146,7 +145,7 @@ class Calender extends Component{
                 defaultView='month'
                 onSelectEvent={this.openModal}
                 onSelectSlot={this.addEvent}
-              /
+              />
               <EventModal
                 ref="child"
                 show={this.state.showModal}
