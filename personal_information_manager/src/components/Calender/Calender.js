@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
-import {storeItem, loadFromLocalStorage} from '../../localStorage'
+import {storeItem} from '../../localStorage'
 import EventModal from '../Events/EventModal'
 
 BigCalendar.momentLocalizer(moment)
@@ -9,38 +9,31 @@ BigCalendar.momentLocalizer(moment)
 class Calender extends Component{
   constructor (props) {
     super(props)
-
-    /* Fetches data and convert date strings to Date object */
-    const data = loadFromLocalStorage('events', [])
-    let events = []
-    for (let event of data) {
-      events.push({
-        id: event.id,
-        title: event.title,
-        start: new Date(event.start),
-        end: new Date(event.end)
-      })
-    }
-
     this.state = {
-      events: events,
+      events: this.props.events,
       showModal: false,
       modalEvent: null,
       error: ''
     }
 
-    // bind functions
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.addEvent = this.addEvent.bind(this)
     this.removeEvent = this.removeEvent.bind(this)
     this.changeEvent = this.changeEvent.bind(this)
-    this.validateEvent = this.validateEvent.bind(this)
   }
 
   /* Replaces part of string from head to tale with input */
   replaceAt(string, head, tail, replace) {
     return string.substr(0, head) + replace + string.substr(tail, string.length)
+  }
+
+  /* Validates the event, returns err msg */
+  validateEvent(start, end) {
+    if (!end && !start) return {err: true, msg: null}
+    if (!end || !start) return {err: false, msg: 'missing one date'}
+    if (end < start) return {err: false, msg:'Start < End'}
+    return {err: true, msg: null}
   }
 
   /* Opens modal */
@@ -58,52 +51,44 @@ class Calender extends Component{
     this.setState({ showModal: false, error: null})
   }
 
-  validateEvent(start, end) {
-    if (!end && !start) return {bool: true, err: null}
-    if (!end || !start) return {bool: false, err: 'missing one date'}
-    // validate start and end
-    if (end < start) return {bool: false, err:'Start < End'}
-    return {bool: true, err: null}
-  }
-
   /* Adds a new element */
-  addEvent(slotInfo) {
+  addEvent(data) {
     let yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
-    // cant add past dates
-    if (slotInfo.start <= yesterday) return
+    // cant add event for past dates
+    if (data.start <= yesterday) return
     // Create a uniqe id 9^5 possible values.
     const id = (((1+Math.random())*0x10000)|0).toString(16).substring(-1)
     const event = {
       id: id,
       title: '',
-      start: slotInfo.start,
-      end: slotInfo.end,
+      start: data.start,
+      end: data.end,
     }
-    // updates events state with the new event
+
     this.setState({
       events: [...this.state.events, event]
     }, () => {
       storeItem('events', this.state.events)
     })
-    // opens modal
+    this.props.update() // Update app state
     this.openModal(event)
   }
 
   /* Remove element */
   removeEvent(event) {
-    // Creates a new list without the given event
     this.setState({
       events: this.state.events.filter(e => e.id !== event.id)
     }, () => {
       storeItem('events', this.state.events)
+      this.props.update() // Update app state
     })
     this.closeModal()
   }
 
   /* Change info of specific element */
+  // Todo short & pretty
   changeEvent(changes) {
-
     // find id of event
     const idx = this.state.events.indexOf(this.state.modalEvent)
     // save event
@@ -119,15 +104,16 @@ class Calender extends Component{
       event.end = new Date(this.replaceAt(event.end.toString(), 16, 24, changes.end))
     }
     // validates input, returns if error and updates message
-    let {bool, err} = this.validateEvent(event.start, event.end)
-    if (!bool) return this.setState({error: err})
+    let {err, msg} = this.validateEvent(event.start, event.end)
+    if (!err) return this.setState({error: msg})
     
-    // set state and store new list
     this.setState({
       events: [...events, event]
     }, () => {
       storeItem('events', this.state.events)
+      this.props.update() // Update app state
     })
+
     this.closeModal()
   }
 
