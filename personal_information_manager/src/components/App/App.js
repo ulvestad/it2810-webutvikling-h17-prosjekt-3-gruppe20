@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { storeItem, loadFromLocalStorage} from '../../localStorage'
+import { getEvents, getNotis, getTodos, getNotes } from '../../localStorage'
 
 //CSS imports
 import './App.css';
@@ -21,30 +21,34 @@ import Notifications from "../Notifications/Notifications.js";
 import Footer from "../Footer/Footer.js";
 
 class App extends Component {
-
-  //Check if page is loaded for the first time (specific user)
-  firstTimeVisit(){
-    var firstTimeVisitToday = loadFromLocalStorage(new Date().toDateString());
-    if(!firstTimeVisitToday){
-      //visited for today key is NOT set. Creates a new key with the date of today.
-      //Format: "Wed Oct 04 2017"
-      var today = new Date().toDateString();
-      storeItem(today, false)
-    }else{
-      //visited for today key is set, no need to do anything
+  constructor (props) {
+    super(props)
+    this.state = {
+      events: getEvents(),
+      notis: getNotis(),
+      todos: getTodos(),
+      notes: getNotes()
     }
+
+    this.update = this.update.bind(this)
+  }
+
+  /* Updates the state, will trigger render() */
+  update() {
+    this.setState({
+      events: getEvents(),
+      notis: getNotis()
+    })
   }
 
   render() {
-    this.firstTimeVisit();
     return (
       <div className="App">
-        <Nav/>
-        <Header/>
-        <Calender/>
-        <Notes/>
-        <Todo/>
-        <Notifications/>
+        <Nav notis={this.state.notis}/>
+        <Calender events={this.state.events} update={this.update}/>
+        <Notes notes={this.state.notes}/>
+        <Todo todos={this.state.todos}/>
+        <Notifications notis={this.state.notis}/>
         <Footer/>
       </div>
     );
