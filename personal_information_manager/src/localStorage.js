@@ -16,6 +16,20 @@ export const loadFromLocalStorage = (key, defaultValue) => {
   }
 }
 
+/* Adding dummy data for testing day! :) */
+export const storeDummyItems = () => {
+  if (!loadFromLocalStorage('events', null)) {
+    let events = '[{"id":"1cadb","title":"Grade me","start":"2017-10-12T08:00:00.000Z","end":"2017-10-12T12:00:00.000Z"},{"id":"1ed06","title":"Send snap","start":"2017-10-12T11:37:00.000Z","end":"2017-10-12T11:38:00.000Z"},{"id":"12b7f","title":"Yaaacht","start":"2017-10-12T16:00:00.000Z","end":"2017-10-13T00:00:00.000Z"},{"id":"12f81","title":"Delete","start":"2017-10-11T12:00:00.000Z","end":"2017-10-11T13:00:00.000Z"}]'
+    let lastVisit = 'Wed Oct 11 2017'
+    let notes = '[{"id":1507753516097,"title":":)","body":"You are awesome"},{"id":1507753472368,"title":"Important","body":"Do stuff"}]'
+    let todos = '[{"id":"1b5f3","value":"Homework","check":true},{"id":"16812","value":"Sleep","check":false},{"id":"1e5a3","value":"Sleep more","check":false}]'
+    localStorage.setItem('events', events)
+    localStorage.setItem('lastVisit', lastVisit)
+    localStorage.setItem('notes', notes)
+    localStorage.setItem('todos', todos)
+  }
+}
+
 /* Returns the events in localstorage */
 export const getEvents = () => {
   const data = loadFromLocalStorage('events', [])

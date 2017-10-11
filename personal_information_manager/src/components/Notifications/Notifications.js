@@ -1,18 +1,33 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
+import { getNotis } from '../../localStorage'
+import { Link } from 'react-router-dom'
 
+/**
+ * Notification component. Get an overview over notifications for given day
+ */
 class Notifications extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      notis: getNotis()
+    };
+  }
+
   render() {
-    const notis = this.props.notis
     return(
-      <section id="notifications">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8 mx-auto">
+      <section id='notifications'>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-lg-8 mx-auto'>
               <h2>Notfications</h2> 
               <kbd>{new Date().toDateString()}</kbd>
               <ul>
-                { notis.map((e, i) => {
-                  return ( <li key={i}><span className="badge badge-danger" id="liBadge">{i+1} </span>{e.title}</li> )
+                { this.state.notis.map((e, i) => {
+                  return ( 
+                    <li key={i}>
+                      <Link to='/calender'> <span className='badge badge-danger' id='liBadge'>{i+1}</span>{e.title} </Link>
+                    </li> 
+                  )
                 })}
               </ul>
             </div>
@@ -23,4 +38,4 @@ class Notifications extends Component {
   }
 }
 
-export default Notifications
+export default Notifications;
