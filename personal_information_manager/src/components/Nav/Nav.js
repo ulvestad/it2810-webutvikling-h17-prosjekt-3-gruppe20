@@ -1,33 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { isFirstVisitOfDay } from '../../localStorage'
 
 class Nav extends Component{
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       isVisible: true
-    };
+    }
 
-    this.updateNotificationBadge = this.updateNotificationBadge.bind(this);
+    this.updateNotificationBadge = this.updateNotificationBadge.bind(this)
   }
 
-  /* */
+  /* Updates the notis badge */
   updateNotificationBadge(e){
     /* Ble kanskje ikke helt riktig */
     this.setState({
       isVisible: isFirstVisitOfDay()
-    });
+    })
   }
 
   render(){
-    const isVisible = this.state.isVisible;
+    const isVisible = this.state.isVisible
     const quantity = this.props.notis.length
-    let badge = null;
+    let badge = null
     //TODO update number when new appoitnmets are made 
     if(isVisible && quantity > 0){
-      badge = <a className="nav-link js-scroll-trigger" onClick={this.updateNotificationBadge} href="#notifications">Notfications <span className="badge badge-danger">{quantity}</span></a>;
+      badge = <Link to='/notification' onClick={this.updateNotificationBadge}> Notfications <span className="badge badge-danger">{quantity}</span></Link>
     }else{
-      badge = <a className="nav-link js-scroll-trigger" href="#notifications">Notfications</a>;
+      badge = <Link to='/notfications'>Notfications</Link>
     }
     return(
       //Navigation using bootstrap4
@@ -40,24 +41,16 @@ class Nav extends Component{
          </button>
          <div className="collapse navbar-collapse" id="navbarResponsive">
            <ul className="navbar-nav ml-auto">
-             <li className="nav-item">
-               <a className="nav-link js-scroll-trigger" href="#calender">Calender</a>
-             </li>
-             <li className="nav-item">
-               <a className="nav-link js-scroll-trigger" href="#notes">Notes</a>
-             </li>
-             <li className="nav-item">
-               <a className="nav-link js-scroll-trigger" href="#todo">Todo</a>
-             </li>
-             <li className="nav-item">
-               {badge}
-             </li>
+             <li className="nav-item nav-link"> <Link to='/calender'> Calender </Link></li>
+             <li className="nav-item nav-link"> <Link to='/notes'> Notes </Link></li>
+             <li className="nav-item nav-link"> <Link to='/todo'> Todo </Link></li>
+             <li className="nav-item nav-link"> {badge}</li>
            </ul>
          </div>
        </div>
       </nav>
-    );
+    )
   }
 }
 
-export default Nav;
+export default Nav

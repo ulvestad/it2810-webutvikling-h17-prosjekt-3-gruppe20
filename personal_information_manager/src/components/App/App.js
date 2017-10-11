@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { getEvents, getNotis, getTodos, getNotes } from '../../localStorage'
 
 //CSS imports
@@ -42,15 +43,19 @@ class App extends Component {
   }
 
   render() {
+    const Notis = () => {
+      <Notifications notis={this.state.notis}/>
+    }
+
     return (
-      <div className="App">
-        <Nav notis={this.state.notis}/>
-        <Calender events={this.state.events} update={this.update}/>
-        <Notes notes={this.state.notes}/>
-        <Todo todos={this.state.todos}/>
-        <Notifications notis={this.state.notis}/>
-        <Footer/>
-      </div>
+      <Router>
+        <div className="App">
+          <Nav notis={this.state.notis}/>
+
+          <Route exact path="/" component={Notis}/>
+    
+        </div>
+      </Router>
     );
   }
 }
