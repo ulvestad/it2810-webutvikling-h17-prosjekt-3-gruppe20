@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const AddNote = ({handleClick}) => {
   return (
@@ -8,6 +9,10 @@ const AddNote = ({handleClick}) => {
       </div>
     </div>
   );
+}
+
+AddNote.propTypes = {
+  handleClick: PropTypes.func
 }
 
 export default AddNote;

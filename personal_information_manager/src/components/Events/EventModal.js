@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 import Modal from 'react-modal'
 
 class EventModal extends Component {
@@ -170,6 +171,15 @@ class EventModal extends Component {
       </div>
     )
   }
+}
+
+EventModal.propTypes = {
+  modalEvent: PropTypes.object,
+  error: PropTypes.string,
+  show: PropTypes.bool,
+  handleClose: PropTypes.func,
+  handleSave: PropTypes.func,
+  handleRemove: PropTypes.func
 }
 
 export default EventModal

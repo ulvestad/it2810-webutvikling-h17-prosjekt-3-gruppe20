@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import PropTypes from 'prop-types';
 import BigCalendar from 'react-big-calendar'
 import moment from 'moment'
 import {storeItem} from '../../localStorage'
@@ -41,7 +42,7 @@ class Calender extends Component{
     this.setState({
       showModal: true,
       modalEvent: event
-    }, () => { 
+    }, () => {
       this.refs.child.updateState()
     })
   }
@@ -106,7 +107,7 @@ class Calender extends Component{
     // validates input, returns if error and updates message
     let {err, msg} = this.validateEvent(event.start, event.end)
     if (!err) return this.setState({error: msg})
-    
+
     this.setState({
       events: [...events, event]
     }, () => {
@@ -147,6 +148,11 @@ class Calender extends Component{
       </section>
     )
   }
+}
+
+Calender.propTypes = {
+  events: PropTypes.array,
+  update: PropTypes.func
 }
 
 export default Calender

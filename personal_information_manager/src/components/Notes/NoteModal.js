@@ -1,8 +1,10 @@
 import React from 'react';
-import {FormGroup, FormControl} from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
 import Modal from 'react-modal';
 
-const NoteModal = ({id, open, handleClose, handleSubmit}) => { 
+const NoteModal = ({id, open, handleClose, handleSubmit}) => {
   const getValueFromInput = (e, component, selector) => {
     const el = e.target.querySelector(`${component}[id="${selector}"]`);
     return el ? el.value : '';
@@ -13,9 +15,9 @@ const NoteModal = ({id, open, handleClose, handleSubmit}) => {
     
     const title = getValueFromInput(e, 'input','title');
     const body = getValueFromInput(e, 'textarea','body')
-    
+
     const note = {
-      id: id, 
+      id: id,
       title: title,
       body: body
     }
@@ -40,8 +42,8 @@ const NoteModal = ({id, open, handleClose, handleSubmit}) => {
   };
 
   return (
-    <Modal 
-      style={modalStyles} 
+    <Modal
+      style={modalStyles}
       isOpen={open}
       onRequestClose={handleClose} >
         <form action="#notes" id="form" onSubmit={submit}>
@@ -57,4 +59,11 @@ const NoteModal = ({id, open, handleClose, handleSubmit}) => {
   );
 }
 
-export default NoteModal; 
+NoteModal.propTypes = {
+  id: PropTypes.number,
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
+  handleSubmit: PropTypes.func
+}
+
+export default NoteModal;

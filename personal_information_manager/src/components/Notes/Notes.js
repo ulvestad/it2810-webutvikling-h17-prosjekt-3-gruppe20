@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Note from './Note';
 import AddNote from './AddNote';
 import NoteModal from './NoteModal';
@@ -30,7 +31,7 @@ class Notes extends Component{
       note.body = this.capitalize(note.body);
       notes = [note, ...this.state.notes];
     }
-    
+
     this.setState({notes: notes, modalOpen: false},() => storeItem('notes', this.state.notes));
   }
 
@@ -48,11 +49,11 @@ class Notes extends Component{
   }
 
   render() {
-    const notes = this.state.notes.map(note => 
-      <Note key={note.id} 
-            id={note.id} 
-            title={note.title} 
-            body={note.body} 
+    const notes = this.state.notes.map(note =>
+      <Note key={note.id}
+            id={note.id}
+            title={note.title}
+            body={note.body}
             handleDelete={this.handleDelete} />
     );
 
@@ -71,11 +72,11 @@ class Notes extends Component{
                 </footer>
               </blockquote>
 
-              <NoteModal id={noteId} 
+              <NoteModal id={noteId}
                   open={this.state.modalOpen}
                   handleClose={this.closeModal}
                   handleSubmit={this.handleSubmit} />
-              
+
               <div className="notesContainer">
                 <AddNote handleClick={this.openModal} />
                 {notes}
@@ -86,6 +87,10 @@ class Notes extends Component{
       </section>
     );
   }
+}
+
+Notes.propTypes = {
+  notes: PropTypes.array
 }
 
 export default Notes;

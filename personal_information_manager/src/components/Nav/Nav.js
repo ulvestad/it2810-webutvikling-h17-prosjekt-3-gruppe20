@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { isFirstVisitOfDay } from '../../localStorage'
+import PropTypes from 'prop-types';
+import { isFirstVisitOfDay } from '../../localStorage';
 
 class Nav extends Component{
   constructor(props){
@@ -56,6 +57,10 @@ class Nav extends Component{
       </nav>
     );
   }
+}
+
+Nav.propTypes = {
+  noits: PropTypes.number
 }
 
 export default Nav;
