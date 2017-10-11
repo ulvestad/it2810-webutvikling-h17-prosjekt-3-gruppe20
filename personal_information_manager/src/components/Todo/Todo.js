@@ -70,8 +70,8 @@ class Todo extends Component {
             {todos.map(key =>
               <ListGroupItem id={key.id} key={key.id}>
                 <Checkbox defaultChecked={key.check} onClick={() => this.changeStorage(key.id)}>
-                  <span className={key.check ? "line" : null}>{key.value}</span>
-                  <Button className="xButton" bsSize="xs" onClick={() => this.removeStorageItem(key.id)}>x</Button>
+                  <span className={key.check ? "line" : "checkboxMargin"}>{key.value}</span>
+                  <Button className="xButton" bsStyle="outline-primary" bsSize="sm" onClick={() => this.removeStorageItem(key.id)}>x</Button>
                 </Checkbox>
               </ListGroupItem>)}
           </div>
@@ -80,11 +80,11 @@ class Todo extends Component {
 
     const inputForm =
       <Form inline onSubmit={this.handleSubmit}>
-        <span className="todoMargin">What to do:</span>
         <FormGroup className="todoMargin" controlId="formInlineTodo">
-          <FormControl type="text" {...{value}} maxLength="75" placeholder="Your todo" onChange={this.handleChange}/>
+          <span className="todoMargin">What to do:</span>
+          <FormControl className="todoMargin" type="text" {...{value}} maxLength="75" placeholder="Your todo" onChange={this.handleChange}/>
+          <Button bsStyle="outline-primary" type="submit">Submit</Button>
         </FormGroup>
-        <Button type="submit">Submit</Button>
       </Form>;
 
     return (

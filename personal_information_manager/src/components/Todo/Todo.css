@@ -1,9 +1,14 @@
 .line {
+  margin-left: 10px;
   text-decoration: line-through;
 }
 
 .todoMargin {
   margin-right: 10px;
+}
+
+.checkboxMargin {
+  margin-left: 10px;
 }
 
 .allTodos {
@@ -13,5 +18,5 @@
 .xButton {
   position: absolute;
   right: 0;
-  top: 0;
+  margin-right: 10px;
 }
