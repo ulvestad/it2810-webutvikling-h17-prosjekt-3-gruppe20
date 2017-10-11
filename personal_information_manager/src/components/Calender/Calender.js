@@ -3,6 +3,7 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import {storeItem, getEvents} from '../../localStorage';
 import EventModal from '../Events/EventModal';
+import PropTypes from 'prop-types';
 
 BigCalendar.momentLocalizer(moment);
 
@@ -108,7 +109,7 @@ class Calender extends Component{
     // validates input, returns if error and updates message
     let {err, msg} = this.validateEvent(event.start, event.end);
     if (!err) return this.setState({error: msg});
-    
+
     this.setState({
       events: [...events, event]
     }, () => {
@@ -150,4 +151,9 @@ class Calender extends Component{
   }
 }
 
-export default Calender;
+Calender.propTypes = {
+  events: PropTypes.array,
+  update: PropTypes.func
+}
+
+export default Calender

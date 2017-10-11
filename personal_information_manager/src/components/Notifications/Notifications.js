@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { getNotis } from '../../localStorage'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 /**
  * Notification component. Get an overview over notifications for given day
@@ -33,9 +34,13 @@ class Notifications extends Component {
             </div>
           </div>
         </div>
-      </section>
-    )
-  }
-}
+      </div>
+    </section>
+  );
+};
+
+Notifications.propTypes = {
+  notis: PropTypes.array
+};
 
 export default Notifications;

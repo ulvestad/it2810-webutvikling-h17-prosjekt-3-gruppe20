@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Note = ({id, title, body, handleDelete}) => {
   return (
@@ -18,6 +19,13 @@ const Note = ({id, title, body, handleDelete}) => {
       </div>
     </div>
   );
+}
+
+Note.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  handleDelete: PropTypes.func
 }
 
 export default Note;

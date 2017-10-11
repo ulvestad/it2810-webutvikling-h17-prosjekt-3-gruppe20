@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { isFirstVisitOfDay, getNotis } from '../../localStorage'
+
 
 /**
  * Navbar component.
@@ -53,6 +55,10 @@ class Nav extends Component{
       </nav>
     );
   }
+}
+
+Nav.propTypes = {
+  noits: PropTypes.number
 }
 
 export default Nav;
