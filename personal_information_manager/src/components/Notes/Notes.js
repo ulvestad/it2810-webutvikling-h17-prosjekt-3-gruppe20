@@ -2,19 +2,13 @@ import React, { Component } from "react";
 import Note from './Note';
 import AddNote from './AddNote';
 import NoteModal from './NoteModal';
-import {storeItem, loadFromLocalStorage} from '../../localStorage';
+import { storeItem } from '../../localStorage';
 
-class Calender extends Component{
+class Notes extends Component{
   constructor(props) {
     super(props);
-    const emptyState = {
-      modalIsOpen: false, 
-      notes: []
-    }
-    const loadedState = loadFromLocalStorage('notes', emptyState);
-    
     this.state = {
-      ...loadedState,
+      notes: this.props.notes,
       modalOpen: false
     }
 
@@ -32,12 +26,12 @@ class Calender extends Component{
     note.title = this.capitalize(note.title);
     note.body = this.capitalize(note.body);
     const notes = [note, ...this.state.notes];
-    this.setState({notes: notes, modalOpen: false}, () => storeItem('notes', this.state));
+    this.setState({notes: notes, modalOpen: false}, () => storeItem('notes', this.state.notes));
   }
 
   handleDelete(idToDelete){
     let notes = this.state.notes.filter((aNote) => aNote.id !== idToDelete);
-    this.setState({notes: notes}, () => storeItem('notes', { notes: notes }));
+    this.setState({notes: notes}, () => storeItem('notes', this.state.notes));
   }
 
   openModal() {
@@ -88,4 +82,4 @@ class Calender extends Component{
   }
 }
 
-export default Calender;
+export default Notes;

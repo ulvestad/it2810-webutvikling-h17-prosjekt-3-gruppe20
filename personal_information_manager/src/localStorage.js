@@ -1,4 +1,4 @@
-// remove export from store and load when everything is included
+/* Saves data to localstorage */
 export const storeItem = (key, val) => {
   try {
     localStorage.setItem(key, JSON.stringify(val))
@@ -39,12 +39,12 @@ export const getNotis = () => {
 
 /* Returns the todos in localstorage */
 export const getTodos = () => {
-  // Todo
+  return loadFromLocalStorage('todos', [])
 }
 
 /* Returns the notes in localstorage*/
 export const getNotes = () => {
-  // Todo
+  return loadFromLocalStorage('notes', []);
 }
 
 /* Is it the first visit of the day */

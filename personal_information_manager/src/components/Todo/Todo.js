@@ -9,13 +9,13 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import Form from 'react-bootstrap/lib/Form';
-import {storeItem, loadFromLocalStorage} from '../../localStorage';
+import {storeItem} from '../../localStorage';
 
 class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: loadFromLocalStorage('todos', []),
+      todos: this.props.todos,
       value: ''
     };
     this.handleChange = this.handleChange.bind(this);
