@@ -13,6 +13,8 @@ class Calender extends Component{
     }
     const loadedState = loadFromLocalStorage('notes', emptyState);
     
+    // overwrite the saved state to make sure the modal is always closed
+    // when the site is reloaded
     this.state = {
       ...loadedState,
       modalOpen: false
@@ -29,10 +31,15 @@ class Calender extends Component{
   }
 
   handleSubmit(note) {
-    note.title = this.capitalize(note.title);
-    note.body = this.capitalize(note.body);
-    const notes = [note, ...this.state.notes];
-    this.setState({notes: notes, modalOpen: false}, () => storeItem('notes', this.state));
+    let notes = this.state.notes;
+
+    if (note.title || note.body) {
+      note.title = this.capitalize(note.title);
+      note.body = this.capitalize(note.body);
+      notes = [note, ...this.state.notes];
+    }
+    
+    this.setState({notes: notes, modalOpen: false},() => storeItem('notes', this.state));
   }
 
   handleDelete(idToDelete){
@@ -76,6 +83,7 @@ class Calender extends Component{
                   open={this.state.modalOpen}
                   handleClose={this.closeModal}
                   handleSubmit={this.handleSubmit} />
+              
               <div className="notesContainer">
                 <AddNote handleClick={this.openModal} />
                 {notes}
