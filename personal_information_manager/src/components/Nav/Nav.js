@@ -5,15 +5,14 @@ class Nav extends Component{
   constructor(props){
     super(props);
     this.state = {
-      isVisible: true
+      isVisible: isFirstVisitOfDay()
     };
 
     this.updateNotificationBadge = this.updateNotificationBadge.bind(this);
   }
 
-  /* */
+  /*Updates notifications-badge depending of user visist*/
   updateNotificationBadge(e){
-    /* Ble kanskje ikke helt riktig */
     this.setState({
       isVisible: isFirstVisitOfDay()
     });
@@ -23,7 +22,6 @@ class Nav extends Component{
     const isVisible = this.state.isVisible;
     const quantity = this.props.notis.length
     let badge = null;
-    //TODO update number when new appoitnmets are made 
     if(isVisible && quantity > 0){
       badge = <a className="nav-link js-scroll-trigger" onClick={this.updateNotificationBadge} href="#notifications">Notfications <span className="badge badge-danger">{quantity}</span></a>;
     }else{

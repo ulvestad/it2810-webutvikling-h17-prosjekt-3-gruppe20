@@ -1,5 +1,7 @@
 header{
     background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    padding-top: 220px;
+    padding-bottom: 120px;
 }
 p{
   margin-top: 15px;

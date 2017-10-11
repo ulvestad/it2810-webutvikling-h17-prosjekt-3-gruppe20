@@ -44,6 +44,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header/>
         <Nav notis={this.state.notis}/>
         <Calender events={this.state.events} update={this.update}/>
         <Notes notes={this.state.notes}/>
