@@ -3,8 +3,12 @@
   text-decoration: line-through;
 }
 
-.todoMargin {
+.rightMargin {
   margin-right: 10px;
+}
+
+.todoMargin {
+  margin: 10px 10px 10px 0;
 }
 
 .checkboxMargin {
@@ -18,5 +22,6 @@
 .xButton {
   position: absolute;
   right: 0;
-  margin-right: 10px;
+  top: 0;
+  margin: 10px 10px 0 0;
 }
