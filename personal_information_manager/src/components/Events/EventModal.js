@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import Modal from 'react-modal'
 
-class EventModal extends Component { 
-  constructor(props){
+class EventModal extends Component {
+  constructor(props) {
     super(props)
     this.state = {
       title: '',
@@ -10,94 +10,166 @@ class EventModal extends Component {
       end: ''
     }
 
-    this.handleTitle = this.handleTitle.bind(this)
-    this.handleStart = this.handleStart.bind(this)
-    this.handleEnd = this.handleEnd.bind(this)
-    this.updateState = this.updateState.bind(this)
+    this.handleTitle = this
+      .handleTitle
+      .bind(this)
+    this.handleStart = this
+      .handleStart
+      .bind(this)
+    this.handleEnd = this
+      .handleEnd
+      .bind(this)
+    this.updateState = this
+      .updateState
+      .bind(this)
+    this.formatDateToDay = this
+      .formatDateToDay
+      .bind(this)
+    this.formatDateToTime = this
+      .formatDateToTime
+      .bind(this)
+
   }
 
   /* Merge these 3 methods? */
   handleTitle(e) {
-    this.setState({ title: e.target.value })
+    this.setState({title: e.target.value})
   }
 
   handleStart(e) {
-    this.setState({ start: e.target.value })
+    this.setState({start: e.target.value})
   }
 
   handleEnd(e) {
-    this.setState({ end: e.target.value })
+    this.setState({end: e.target.value})
   }
 
   /* Updates the modal with props */
   updateState() {
-    this.setState({...this.props.modalEvent})
+    this.setState({
+      ...this.props.modalEvent
+    })
+  }
+
+  formatDateToDay(date) {
+    return date
+      .toString()
+      .substring(0, 15)
+  }
+
+  formatDateToTime(date) {
+    return date
+      .toString()
+      .substring(16, 24)
   }
 
   render() {
-    if (!this.props.modalEvent) return (<div> </div>)
+    if (!this.props.modalEvent) {
+      return (
+        <div></div>
+      )
+    }
+
     // error div to add if error
-    const error = <div> <label> Error: </label> {this.props.error} </div>
+    const error = <div>
+      <label>
+        Error:
+      </label>
+      {this.props.error}
+    </div>
 
     // Putte i css? fucked up
     const modalStyles = {
-      overlay:{zIndex:10},
-      content:{top:'50%',left:'50%',right:'auto',bottom:'auto',marginRight:'-50%',transform:'translate(-50%, -50%)'}
+      overlay: {
+        zIndex: 10
+      },
+      content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+      }
     }
+
+    const start = this.props.modalEvent.start
+    const end = this.props.modalEvent.end
+    const title = this.props.modalEvent.title
+
     return (
       <div>
         <Modal
-          style={modalStyles} 
+          style={modalStyles}
           isOpen={this.props.show}
           onRequestClose={this.props.handleClose}>
-
+          <h2>
+            Event
+          </h2>
+          <hr/>
           <div>
-            <h2> Event </h2>
-          </div>
-          <hr />
-          <div>
-            <label> title: </label> {this.props.modalEvent.title}
-            <input className="form-control"  id="title" type="text"
-              defaultValue={this.props.modalEvent.title} 
+            <label>
+              Title:
+            </label>
+            {" " + title}
+            <input
+              className="form-control"
+              id="title"
+              type="text"
+              defaultValue={title}
               placeholder='title'
               onChange={this.handleTitle}/>
+            <br/>
           </div>
           <div>
-            <label> start: </label>
-            {this.props.modalEvent.start.toString().substring(0, 15)}
-            <input className="form-control" id="start" type="time"
-              defaultValue={this.props.modalEvent.start.toString().substring(16,24)}
-              onChange={this.handleStart}
-            />
+            <label>
+              Start:
+            </label>
+            {" " + this.formatDateToDay(start)}
+            <input
+              className="form-control"
+              id="start"
+              type="time"
+              defaultValue={this.formatDateToTime(start)}
+              onChange={this.handleStart}/>
+            <br/>
           </div>
           <div>
-            <label> end: </label> 
-            {this.props.modalEvent.end.toString().substring(0, 15)}
-            <input className="form-control" id="end" type="time"
-              defaultValue={this.props.modalEvent.end.toString().substring(16,24)}
-              onChange={this.handleEnd}
-            />
+            <label>
+              End:
+            </label>
+            {" " + this.formatDateToDay(end)}
+            <input
+              className="form-control"
+              id="end"
+              type="time"
+              defaultValue={this.formatDateToTime(end)}
+              onChange={this.handleEnd}/>
+            <br/>
           </div>
-          <hr />
+          <hr/>
           <div>
-            <button 
+            <button
               className="btn btn-success"
-              onClick={() => this.props.handleSave(this.state)}> Save
+              onClick={() => this.props.handleSave(this.state)}>
+              Save
             </button>
             <button
               className="btn btn-danger"
-              onClick={() => this.props.handleRemove(this.props.modalEvent)}> Delete 
+              onClick={() => this.props.handleRemove(this.props.modalEvent)}>
+              Delete
             </button>
-            <button 
-              className="btn btn-warning"
-              onClick={() => this.props.handleClose()}> Close
+            <button className="btn btn-warning" onClick={() => this.props.handleClose()}>
+              Close
             </button>
           </div>
-          { this.props.error ? error : null }
+          {this.props.error
+            ? error
+            : null}
         </Modal>
       </div>
     )
   }
 }
 
-export default EventModal 
+export default EventModal
