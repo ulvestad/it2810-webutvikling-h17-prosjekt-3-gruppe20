@@ -17,7 +17,7 @@ const NoteModal = ({id, open, handleClose, handleSubmit}) => {
       title: title,
       body: body
     }
-    
+
     handleSubmit(note);
   }
 

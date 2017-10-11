@@ -23,10 +23,15 @@ class Notes extends Component{
   }
 
   handleSubmit(note) {
-    note.title = this.capitalize(note.title);
-    note.body = this.capitalize(note.body);
-    const notes = [note, ...this.state.notes];
-    this.setState({notes: notes, modalOpen: false}, () => storeItem('notes', this.state.notes));
+    let notes = this.state.notes;
+
+    if (note.title || note.body) {
+      note.title = this.capitalize(note.title);
+      note.body = this.capitalize(note.body);
+      notes = [note, ...this.state.notes];
+    }
+    
+    this.setState({notes: notes, modalOpen: false},() => storeItem('notes', this.state.notes));
   }
 
   handleDelete(idToDelete){
@@ -70,6 +75,7 @@ class Notes extends Component{
                   open={this.state.modalOpen}
                   handleClose={this.closeModal}
                   handleSubmit={this.handleSubmit} />
+              
               <div className="notesContainer">
                 <AddNote handleClick={this.openModal} />
                 {notes}
