@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import Note from './Note';
 import AddNote from './AddNote';
 import NoteModal from './NoteModal';
-import { storeItem } from '../../localStorage';
+import { storeItem, getNotes } from '../../localStorage';
 
+/**
+ * Note component. Add or remove notes.
+ */
 class Notes extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      notes: this.props.notes,
+      notes: getNotes(),
       modalOpen: false
     }
 
@@ -19,10 +22,12 @@ class Notes extends Component{
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  /* Capitalize the first letter of given string */
   capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+  /* Handler after submit of form */
   handleSubmit(note) {
     let notes = this.state.notes;
 
@@ -35,15 +40,18 @@ class Notes extends Component{
     this.setState({notes: notes, modalOpen: false},() => storeItem('notes', this.state.notes));
   }
 
+  /* Handler for delete of note */
   handleDelete(idToDelete){
     let notes = this.state.notes.filter((aNote) => aNote.id !== idToDelete);
     this.setState({notes: notes}, () => storeItem('notes', this.state.notes));
   }
 
+  /* Opens modal for adding new note*/
   openModal() {
     this.setState({modalOpen: true});
   }
 
+  /* Closes modal */
   closeModal() {
     this.setState({modalOpen: false});
   }

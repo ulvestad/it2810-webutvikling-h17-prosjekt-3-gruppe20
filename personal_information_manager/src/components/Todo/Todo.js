@@ -10,13 +10,16 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import Form from 'react-bootstrap/lib/Form';
-import {storeItem} from '../../localStorage';
+import {storeItem, getTodos} from '../../localStorage';
 
+/**
+ * Todo component. Add, complete or remove todos.
+ */
 class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: this.props.todos,
+      todos: getTodos(),
       value: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -25,6 +28,7 @@ class Todo extends Component {
     this.removeStorageItem = this.removeStorageItem.bind(this);
   }
 
+  /* Handles submit of add todo form */
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.value === '') return;
@@ -38,10 +42,12 @@ class Todo extends Component {
     });
   }
 
+  /* Changes the value when writing in the input */
   handleChange(event) {
     this.setState({value: event.target.value});
   }
 
+  /* Stores the todos list in state in localstorage */
   changeStorage(id) {
     let todosList = [...this.state.todos];
     for (let todo in todosList) {
@@ -55,6 +61,7 @@ class Todo extends Component {
     });
   }
 
+  /* Removes todo item by updating storage list */
   removeStorageItem(id) {
     this.setState({todos: this.state.todos.filter(e => e.id !== id)}, () => {
       storeItem('todos', this.state.todos);
@@ -89,7 +96,7 @@ class Todo extends Component {
       </Form>;
 
     return (
-      <section id="todo" className="bg-light">
+      <section id="todo">
         <Grid bsClass="container">
           <Row>
             <Col lg={8} className="mx-auto">

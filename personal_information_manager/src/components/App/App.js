@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getEvents, getNotis, getTodos, getNotes } from '../../localStorage'
+import { Switch, Route } from 'react-router-dom'
+import { storeDummyItems } from '../../localStorage'
 
 //CSS imports
 import './App.css';
@@ -13,44 +14,24 @@ import '../Events/EventModal.css'
 
 //Component imports
 import Nav from "../Nav/Nav.js";
-import Header from "../Header/Header.js";
 import Calender from "../Calender/Calender.js";
 import Notes from "../Notes/Notes.js";
 import Todo from "../Todo/Todo.js";
 import Notifications from "../Notifications/Notifications.js";
-import Footer from "../Footer/Footer.js";
 
 class App extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      events: getEvents(),
-      notis: getNotis(),
-      todos: getTodos(),
-      notes: getNotes()
-    }
-
-    this.update = this.update.bind(this)
-  }
-
-  /* Updates the state, will trigger render() */
-  update() {
-    this.setState({
-      events: getEvents(),
-      notis: getNotis()
-    })
-  }
-
   render() {
+    // Only for filling localstorage with dummy data.
+    storeDummyItems();
     return (
       <div className="App">
-        <Header/>
-        <Nav notis={this.state.notis}/>
-        <Calender events={this.state.events} update={this.update}/>
-        <Notes notes={this.state.notes}/>
-        <Todo todos={this.state.todos}/>
-        <Notifications notis={this.state.notis}/>
-        <Footer/>
+        <Nav />
+        <Switch>
+          <Route exact path='/' component={Notifications}/>
+          <Route path='/calender' component={Calender}/>
+          <Route path='/todo' component={Todo}/>
+          <Route path='/notes' component={Notes}/>
+        </Switch>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
 
+/* Not used for now */
 const Header = () => {
   return(
     <header id="page-top" className="bg-primary text-white">
