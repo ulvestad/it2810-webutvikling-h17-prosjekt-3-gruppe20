@@ -1,45 +1,31 @@
 import React, { Component } from 'react';
-import { getAppoitments }  from '../Notifications/Notifications'
-import { storeItem, loadFromLocalStorage} from '../../localStorage'
+import { isFirstVisitOfDay } from '../../localStorage'
 
 class Nav extends Component{
-
   constructor(props){
     super(props);
-    this.handleVisibleBadge = this.handleVisibleBadge.bind(this);
-    this.handleHiddenBadge = this.handleHiddenBadge.bind(this);
+    this.state = {
+      isVisible: true
+    };
+
     this.updateNotificationBadge = this.updateNotificationBadge.bind(this);
-    this.state= {isVisible: true};
   }
 
-  //Conditional rendering
-  handleVisibleBadge(){
-    this.setState({isVisible:true});
-  }
-  handleHiddenBadge(){
-    this.setState({isVisible:false});
-  }
+  /* */
   updateNotificationBadge(e){
-    var firstTimeVisitToday = loadFromLocalStorage(new Date().toDateString());
-    if(!firstTimeVisitToday){
-      var today = new Date().toDateString();
-      storeItem(today, true)
-      this.handleHiddenBadge()
-    }else{
-      this.handleHiddenBadge()
-    }
-  }
-
-  getNumberOfAppoitments(){
-    return getAppoitments().length;
+    /* Ble kanskje ikke helt riktig */
+    this.setState({
+      isVisible: isFirstVisitOfDay()
+    });
   }
 
   render(){
     const isVisible = this.state.isVisible;
+    const quantity = this.props.notis.length
     let badge = null;
     //TODO update number when new appoitnmets are made 
-    if(isVisible && this.getNumberOfAppoitments()>0){
-      badge = <a className="nav-link js-scroll-trigger" onClick={this.updateNotificationBadge} href="#notifications">Notfications <span className="badge badge-danger">{this.getNumberOfAppoitments()}</span></a>;
+    if(isVisible && quantity > 0){
+      badge = <a className="nav-link js-scroll-trigger" onClick={this.updateNotificationBadge} href="#notifications">Notfications <span className="badge badge-danger">{quantity}</span></a>;
     }else{
       badge = <a className="nav-link js-scroll-trigger" href="#notifications">Notfications</a>;
     }

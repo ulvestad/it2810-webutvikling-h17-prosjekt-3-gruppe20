@@ -9,12 +9,14 @@ class EventModal extends Component {
       start: '',
       end: ''
     }
+
     this.handleTitle = this.handleTitle.bind(this)
     this.handleStart = this.handleStart.bind(this)
     this.handleEnd = this.handleEnd.bind(this)
     this.updateState = this.updateState.bind(this)
   }
 
+  /* Merge these 3 methods? */
   handleTitle(e) {
     this.setState({ title: e.target.value })
   }
@@ -27,8 +29,9 @@ class EventModal extends Component {
     this.setState({ end: e.target.value })
   }
 
+  /* Updates the modal with props */
   updateState() {
-    this.setState({...this.props.modalEvent}, () => console.log('state', this.state))
+    this.setState({...this.props.modalEvent})
   }
 
   render() {

@@ -1,22 +1,56 @@
+// remove export from store and load when everything is included
 export const storeItem = (key, val) => {
   try {
-    localStorage.setItem(key, JSON.stringify(val));
+    localStorage.setItem(key, JSON.stringify(val))
+  } catch (e) {
+    console.err(e)
   }
-  catch (e) {
-    // If we get here, localStorage is not defined.
-    // This will always be the case during server side rendering,
-    // and also for some old browsers.
-    // If so, we won't be able to remember changes in localStorage for later sessions,
-    // but the app should work fine anyway.
-  }
-  return val;
-};
+}
 
+/* Returns data from localstorage */
 export const loadFromLocalStorage = (key, defaultValue) => {
   try {
-    return JSON.parse(localStorage[key]);
+    return JSON.parse(localStorage[key])
+  } catch (e) {
+    return defaultValue
   }
-  catch (e) {
-    return defaultValue;
+}
+
+/* Returns the events in localstorage */
+export const getEvents = () => {
+  const data = loadFromLocalStorage('events', [])
+  let events = []
+  for (let event of data) {
+    events.push({
+      id: event.id,
+      title: event.title,
+      start: new Date(event.start),
+      end: new Date(event.end)
+    })
   }
-};
+  return events
+}
+
+/* Filters to get todays notis */
+export const getNotis = () => {
+  const today = new Date().toDateString()
+  return getEvents().filter(d => d.start.toDateString() === today)
+}
+
+/* Returns the todos in localstorage */
+export const getTodos = () => {
+  // Todo
+}
+
+/* Returns the notes in localstorage*/
+export const getNotes = () => {
+  // Todo
+}
+
+/* Is it the first visit of the day */
+export const isFirstVisitOfDay = () => {
+  const today = new Date().toDateString()
+  const lastVisit = loadFromLocalStorage('lastVisit')
+  storeItem('lastVisit', today)
+  return (lastVisit === today) ? false : true
+}
