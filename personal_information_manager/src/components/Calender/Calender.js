@@ -110,7 +110,7 @@ class Calender extends Component {
         .events
         .filter(e => e.id !== event.id)
     }, () => {
-      storeItem('events', this.state.events)
+      storeItem('events', this.state.events);
     })
     this.closeModal();
   }
@@ -151,7 +151,7 @@ class Calender extends Component {
         event
       ]
     }, () => {
-      storeItem('events', this.state.events)
+      storeItem('events', this.state.events);
     })
 
     this.closeModal();
