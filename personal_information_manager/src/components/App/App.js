@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
-import { storeDummyItems } from '../../localStorage'
+import React, {Component} from 'react';
+import {Switch, Route} from 'react-router-dom'
+import {storeDummyItems} from '../../localStorage'
 
 //CSS imports
 import './App.css';
@@ -25,7 +25,7 @@ class App extends Component {
     storeDummyItems();
     return (
       <div className="App">
-        <Nav />
+        <Nav/>
         <Switch>
           <Route exact path='/' component={Notifications}/>
           <Route path='/calender' component={Calender}/>

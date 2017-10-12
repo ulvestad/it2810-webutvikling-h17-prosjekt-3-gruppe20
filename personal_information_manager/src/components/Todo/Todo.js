@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -22,22 +22,39 @@ class Todo extends Component {
       todos: getTodos(),
       value: ''
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.changeStorage = this.changeStorage.bind(this);
-    this.removeStorageItem = this.removeStorageItem.bind(this);
+    this.handleChange = this
+      .handleChange
+      .bind(this);
+    this.handleSubmit = this
+      .handleSubmit
+      .bind(this);
+    this.changeStorage = this
+      .changeStorage
+      .bind(this);
+    this.removeStorageItem = this
+      .removeStorageItem
+      .bind(this);
   }
 
   /* Handles submit of add todo form */
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.value === '') return;
+    if (this.state.value === '') 
+      return;
     const todo = {
-      id: (((1+Math.random())*0x10000)|0).toString(16).substring(-1),
+      id: (((1 + Math.random()) * 0x10000) | 0)
+        .toString(16)
+        .substring(-1),
       value: this.state.value,
       check: false
     };
-    this.setState({todos: [...this.state.todos, todo,], value: ''}, () => {
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        todo
+      ],
+      value: ''
+    }, () => {
       storeItem('todos', this.state.todos)
     });
   }
@@ -56,44 +73,63 @@ class Todo extends Component {
         todos.check = !todos.check;
       }
     }
-    this.setState({todos: todosList}, () => {
+    this.setState({
+      todos: todosList
+    }, () => {
       storeItem('todos', todosList);
     });
   }
 
   /* Removes todo item by updating storage list */
   removeStorageItem(id) {
-    this.setState({todos: this.state.todos.filter(e => e.id !== id)}, () => {
+    this.setState({
+      todos: this
+        .state
+        .todos
+        .filter(e => e.id !== id)
+    }, () => {
       storeItem('todos', this.state.todos);
     });
   }
 
   render() {
     const {value, todos} = this.state;
-    const listGroupItems =
-      <div>
-        {todos.length ? <h4 className="allTodos">All of your todo’s:</h4> : null}
-        <ListGroup>
-          <div className="box">
-            {todos.map(key =>
-              <ListGroupItem id={key.id} key={key.id}>
-                <Checkbox defaultChecked={key.check} onClick={() => this.changeStorage(key.id)}>
-                  <span className={key.check ? "line" : "checkboxMargin"}>{key.value}</span>
-                  <Button className="xButton" bsStyle="primary" bsSize="sm" onClick={() => this.removeStorageItem(key.id)}>x</Button>
-                </Checkbox>
-              </ListGroupItem>)}
-          </div>
-        </ListGroup>
-      </div>;
+    const listGroupItems = <div>
+      {todos.length
+        ? <h4 className="allTodos">All of your todo’s:</h4>
+        : null}
+      <ListGroup>
+        <div className="box">
+          {todos.map(key => <ListGroupItem id={key.id} key={key.id}>
+            <Checkbox defaultChecked={key.check} onClick={() => this.changeStorage(key.id)}>
+              <span
+                className={key.check
+                ? "line"
+                : "checkboxMargin"}>{key.value}</span>
+              <Button
+                className="xButton"
+                bsStyle="primary"
+                bsSize="sm"
+                onClick={() => this.removeStorageItem(key.id)}>x</Button>
+            </Checkbox>
+          </ListGroupItem>)}
+        </div>
+      </ListGroup>
+    </div>;
 
-    const inputForm =
-      <Form inline onSubmit={this.handleSubmit}>
-        <FormGroup controlId="formInlineTodo">
-          <span className="rightMargin">What to do:</span>
-          <FormControl className="todoMargin" type="text" {...{value}} maxLength="75" placeholder="Your todo here" onChange={this.handleChange}/>
-          <Button bsStyle="primary" type="submit">Submit</Button>
-        </FormGroup>
-      </Form>;
+    const inputForm = <Form inline onSubmit={this.handleSubmit}>
+      <FormGroup controlId="formInlineTodo">
+        <span className="rightMargin">What to do:</span>
+        <FormControl
+          className="todoMargin"
+          type="text"
+          {...{value}}
+          maxLength="75"
+          placeholder="Your todo here"
+          onChange={this.handleChange}/>
+        <Button bsStyle="primary" type="submit">Submit</Button>
+      </FormGroup>
+    </Form>;
 
     return (
       <section id="todo">
