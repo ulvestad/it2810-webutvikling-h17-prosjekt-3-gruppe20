@@ -2,7 +2,11 @@
   "use strict"; // Start of use strict
 
   // Closes responsive menu when a scroll trigger link is clicked
-  $('body').on('click', '.js-scroll-trigger', function () {
+  $('body').on('click', '.nav-link', function () {
+    $('.navbar-collapse').collapse('hide');
+  });
+
+  $('body').on('click', '.navbar-brand', function () {
     $('.navbar-collapse').collapse('hide');
   });
 
