@@ -23,18 +23,15 @@ class Notifications extends Component {
               <h2>Notfications</h2>
               <kbd>{new Date().toDateString()}</kbd>
               <ul>
-                {this
-                  .state
-                  .notis
-                  .map((e, i) => {
-                    return (
-                      <li key={i}>
-                        <Link to='/calender'>
-                          <span className='badge badge-danger' id='liBadge'>{i + 1}</span>{e.title}
-                        </Link>
-                      </li>
-                    )
-                  })}
+                {this.state.notis.map((e, i) => {
+                  return (
+                    <li key={i}>
+                      <Link to='/calender'>
+                        <span className='badge badge-danger' id='liBadge'>{i + 1}</span>{e.title}
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </div>

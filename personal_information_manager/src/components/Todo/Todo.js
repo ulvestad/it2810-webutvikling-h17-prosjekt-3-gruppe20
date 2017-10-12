@@ -22,37 +22,23 @@ class Todo extends Component {
       todos: getTodos(),
       value: ''
     };
-    this.handleChange = this
-      .handleChange
-      .bind(this);
-    this.handleSubmit = this
-      .handleSubmit
-      .bind(this);
-    this.changeStorage = this
-      .changeStorage
-      .bind(this);
-    this.removeStorageItem = this
-      .removeStorageItem
-      .bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.changeStorage = this.changeStorage.bind(this);
+    this.removeStorageItem = this.removeStorageItem.bind(this);
   }
 
   /* Handles submit of add todo form */
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.value === '') 
-      return;
+    if (this.state.value === '') return;
     const todo = {
-      id: (((1 + Math.random()) * 0x10000) | 0)
-        .toString(16)
-        .substring(-1),
+      id: (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(-1),
       value: this.state.value,
       check: false
     };
     this.setState({
-      todos: [
-        ...this.state.todos,
-        todo
-      ],
+      todos: [...this.state.todos, todo],
       value: ''
     }, () => {
       storeItem('todos', this.state.todos)
@@ -83,10 +69,7 @@ class Todo extends Component {
   /* Removes todo item by updating storage list */
   removeStorageItem(id) {
     this.setState({
-      todos: this
-        .state
-        .todos
-        .filter(e => e.id !== id)
+      todos: this.state.todos.filter(e => e.id !== id)
     }, () => {
       storeItem('todos', this.state.todos);
     });
@@ -95,9 +78,7 @@ class Todo extends Component {
   render() {
     const {value, todos} = this.state;
     const listGroupItems = <div>
-      {todos.length
-        ? <h4 className="allTodos">All of your todo’s:</h4>
-        : null}
+      {todos.length ? <h4 className="allTodos">All of your todo’s:</h4> : null}
       <ListGroup>
         <div className="box">
           {todos.map(key => <ListGroupItem id={key.id} key={key.id}>

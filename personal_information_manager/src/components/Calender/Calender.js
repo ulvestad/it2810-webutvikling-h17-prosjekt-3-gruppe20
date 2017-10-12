@@ -21,21 +21,11 @@ class Calender extends Component {
       error: ''
     }
 
-    this.openModal = this
-      .openModal
-      .bind(this);
-    this.closeModal = this
-      .closeModal
-      .bind(this);
-    this.addEvent = this
-      .addEvent
-      .bind(this);
-    this.removeEvent = this
-      .removeEvent
-      .bind(this);
-    this.changeEvent = this
-      .changeEvent
-      .bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.addEvent = this.addEvent.bind(this);
+    this.removeEvent = this.removeEvent.bind(this);
+    this.changeEvent = this.changeEvent.bind(this);
   }
 
   /* Replaces part of string from head to tale with input */
@@ -45,11 +35,11 @@ class Calender extends Component {
 
   /* Validates the event, returns err msg */
   validateEvent(start, end) {
-    if (!end && !start) 
+    if (!end && !start)
       return {err: true, msg: null};
-    if (!end || !start) 
+    if (!end || !start)
       return {err: false, msg: 'missing one date'};
-    if (end < start) 
+    if (end < start)
       return {err: false, msg: 'Start < End'};
     return {err: true, msg: null};
   }
@@ -60,10 +50,7 @@ class Calender extends Component {
       showModal: true,
       modalEvent: event
     }, () => {
-      this
-        .refs
-        .child
-        .updateState();
+      this.refs.child.updateState();
     })
   }
 
@@ -77,9 +64,9 @@ class Calender extends Component {
     let yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     // cant add event for past dates
-    if (data.start <= yesterday) 
+    if (data.start <= yesterday)
       return;
-    
+
     // Create a uniqe id 9^5 possible values.
     const id = (((1 + Math.random()) * 0x10000) | 0)
       .toString(16)
@@ -92,10 +79,7 @@ class Calender extends Component {
     };
 
     this.setState({
-      events: [
-        ...this.state.events,
-        event
-      ]
+      events: [...this.state.events,event]
     }, () => {
       storeItem('events', this.state.events)
     })
@@ -105,10 +89,7 @@ class Calender extends Component {
   /* Remove element */
   removeEvent(event) {
     this.setState({
-      events: this
-        .state
-        .events
-        .filter(e => e.id !== event.id)
+      events: this.state.events.filter(e => e.id !== event.id)
     }, () => {
       storeItem('events', this.state.events);
     })
@@ -119,20 +100,12 @@ class Calender extends Component {
   // Todo short & pretty
   changeEvent(changes) {
     // find id of event
-    const idx = this
-      .state
-      .events
-      .indexOf(this.state.modalEvent);
+    const idx = this.state.events.indexOf(this.state.modalEvent);
     // save event
-    let event = {
-      ...this.state.events[idx]
-    };
+    let event = {...this.state.events[idx]};
     event.title = changes.title;
     // delete event
-    const events = this
-      .state
-      .events
-      .filter(e => e.id !== event.id);
+    const events = this.state.events.filter(e => e.id !== event.id);
     // change date of event if changed
     if (typeof changes.start === 'string') {
       event.start = new Date(this.replaceAt(event.start.toString(), 16, 24, changes.start));
@@ -142,14 +115,10 @@ class Calender extends Component {
     }
     // validates input, returns if error and updates message
     let {err, msg} = this.validateEvent(event.start, event.end);
-    if (!err) 
-      return this.setState({error: msg});
-    
+    if (!err) return this.setState({error: msg});
+
     this.setState({
-      events: [
-        ...events,
-        event
-      ]
+      events: [...events,event]
     }, () => {
       storeItem('events', this.state.events);
     })

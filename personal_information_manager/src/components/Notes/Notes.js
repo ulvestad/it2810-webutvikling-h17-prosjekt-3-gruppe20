@@ -10,31 +10,21 @@ import {storeItem, getNotes} from '../../localStorage';
  */
 class Notes extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       notes: getNotes(),
       modalOpen: false
     }
 
-    this.openModal = this
-      .openModal
-      .bind(this);
-    this.closeModal = this
-      .closeModal
-      .bind(this);
-    this.handleSubmit = this
-      .handleSubmit
-      .bind(this);
-    this.handleDelete = this
-      .handleDelete
-      .bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   /* Capitalize the first letter of given string */
   capitalize(str) {
-    return str
-      .charAt(0)
-      .toUpperCase() + str.slice(1);
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   /* Handler after submit of form */
@@ -44,9 +34,7 @@ class Notes extends Component {
     if (note.title || note.body) {
       note.title = this.capitalize(note.title);
       note.body = this.capitalize(note.body);
-      notes = [
-        note, ...this.state.notes
-      ];
+      notes = [note, ...this.state.notes];
     }
 
     this.setState({
@@ -57,10 +45,7 @@ class Notes extends Component {
 
   /* Handler for delete of note */
   handleDelete(idToDelete) {
-    let notes = this
-      .state
-      .notes
-      .filter((aNote) => aNote.id !== idToDelete);
+    let notes = this.state.notes.filter((aNote) => aNote.id !== idToDelete);
     this.setState({
       notes: notes
     }, () => storeItem('notes', this.state.notes));
@@ -77,15 +62,14 @@ class Notes extends Component {
   }
 
   render() {
-    const notes = this
-      .state
-      .notes
-      .map(note => <Note
+    const notes = this.state.notes.map(note =>
+      <Note
         key={note.id}
         id={note.id}
         title={note.title}
         body={note.body}
-        handleDelete={this.handleDelete}/>);
+        handleDelete={this.handleDelete}
+      />);
 
     const noteId = new Date().getTime()
     return (

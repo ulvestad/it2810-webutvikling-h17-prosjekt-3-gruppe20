@@ -11,25 +11,12 @@ class EventModal extends Component {
       end: ''
     }
 
-    this.handleTitle = this
-      .handleTitle
-      .bind(this)
-    this.handleStart = this
-      .handleStart
-      .bind(this)
-    this.handleEnd = this
-      .handleEnd
-      .bind(this)
-    this.updateState = this
-      .updateState
-      .bind(this)
-    this.formatDateToDay = this
-      .formatDateToDay
-      .bind(this)
-    this.formatDateToTime = this
-      .formatDateToTime
-      .bind(this)
-
+    this.handleTitle = this.handleTitle.bind(this)
+    this.handleStart = this.handleStart.bind(this)
+    this.handleEnd = this.handleEnd.bind(this)
+    this.updateState = this.updateState.bind(this)
+    this.formatDateToDay = this.formatDateToDay.bind(this)
+    this.formatDateToTime = this.formatDateToTime.bind(this)
   }
 
   /* Merge these 3 methods? */
@@ -53,9 +40,7 @@ class EventModal extends Component {
   }
 
   formatDateToDay(date) {
-    return date
-      .toString()
-      .substring(0, 15)
+    return date.toString().substring(0, 15)
   }
 
   formatDateToTime(date) {

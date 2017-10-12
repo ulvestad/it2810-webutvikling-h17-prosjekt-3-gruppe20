@@ -6,12 +6,8 @@ import Modal from 'react-modal';
 
 const NoteModal = ({id, open, handleClose, handleSubmit}) => {
   const getValueFromInput = (e, component, selector) => {
-    const el = e
-      .target
-      .querySelector(`${component}[id="${selector}"]`);
-    return el
-      ? el.value
-      : '';
+    const el = e.target.querySelector(`${component}[id="${selector}"]`);
+    return el ? el.value : '';
   }
 
   const submit = (e) => {

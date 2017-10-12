@@ -8,15 +8,13 @@ import {isFirstVisitOfDay, getNotis} from '../../localStorage'
  */
 class Nav extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       notis: getNotis(),
       isVisible: isFirstVisitOfDay()
-    };
+    }
 
-    this.updateNotificationBadge = this
-      .updateNotificationBadge
-      .bind(this);
+    this.updateNotificationBadge = this.updateNotificationBadge.bind(this);
   }
 
   /* Updates notifications-badge depending of user visist */
