@@ -2,7 +2,7 @@ import React from "react";
 
 /* Not used for now */
 const Header = () => {
-  return(
+  return (
     <header id="page-top" className="bg-primary text-white">
       <div className="container text-center">
         <h2>Welcome to the Personal Information Manager</h2>
