@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {getNotis} from '../../localStorage'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
+import '../Header/Header.css';
+import Header from "../Header/Header.js";
 
 /**
  * Notification component. Get an overview over notifications for given day
@@ -16,6 +18,8 @@ class Notifications extends Component {
 
   render() {
     return (
+      <div>
+      <Header/>
       <section id='notifications'>
         <div className='container'>
           <div className='row'>
@@ -37,6 +41,7 @@ class Notifications extends Component {
           </div>
         </div>
       </section>
+    </div>
     );
   }
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-/* Not used for now */
+/* Header section for welcome message to "homepage/notifications" */
 const Header = () => {
   return (
     <header id="page-top" className="bg-primary text-white">
