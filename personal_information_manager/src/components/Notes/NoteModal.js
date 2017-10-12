@@ -36,7 +36,7 @@ const NoteModal = ({id, open, handleClose, handleSubmit}) => {
       bottom                : 'auto',
       marginRight           : '-50%',
       transform             : 'translate(-50%, -50%)',
-      backgroundColor       : "#1CC5D4",
+      backgroundColor       : "#007bff",
       color                 : "white"
     }
   };
