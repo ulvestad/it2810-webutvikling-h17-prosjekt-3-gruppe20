@@ -14,6 +14,13 @@ it('calls handler when clicked', () => {
   const wrapper = shallow(<Note handleDelete={handler} id={2} />);
 
   wrapper.find('button').simulate('click');
-  expect(handler.args[0][0]).to.equal(2);
   expect(handler).to.have.property('callCount', 1);
+});
+
+it('calls handler with correct id', () => {
+  const handler = sinon.spy();
+  const wrapper = shallow(<Note handleDelete={handler} id={2} />);
+
+  wrapper.find('button').simulate('click');
+  expect(handler.args[0][0]).to.equal(2);
 });
