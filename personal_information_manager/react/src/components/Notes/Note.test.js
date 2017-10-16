@@ -24,3 +24,6 @@ it('calls handler with correct id', () => {
   wrapper.find('button').simulate('click');
   expect(handler.args[0][0]).to.equal(2);
 });
+
+// React-modal uses portals, which are problematic at the current time
+// Enzyme does not funny support them, and mount fails
