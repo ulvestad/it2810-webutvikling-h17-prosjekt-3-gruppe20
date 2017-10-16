@@ -3,8 +3,8 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import App from './App';
+import AddNote from './AddNote';
 
 it('renders without crashing', () => {
-  shallow(<App />);
+  shallow(<AddNote handleClick={() => {}} />);
 });
