@@ -59,7 +59,8 @@ class Todo extends Component {
     });
   }
 
-  render() {
+
+ render() {
     const {value, todos} = this.state;
 
     const styles = StyleSheet.create({
