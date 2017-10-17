@@ -7,6 +7,7 @@ import Todo from './components/Todo'
 import Header from './components/Header'
 import Notifications from './components/Notifications'
 
+
 /*Simple stylesheet for App-content*/
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +30,7 @@ const NotifierScreen = ({navigation}) => (
       </ScrollView>
     </View>
   );
+
 
   /*Notes view with corresponding components*/
   const NotesScreen = ({ navigation }) => (
