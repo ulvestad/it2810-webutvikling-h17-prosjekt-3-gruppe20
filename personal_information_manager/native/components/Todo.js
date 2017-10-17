@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Todo () => {
+const Todo = () => {
   return (
     <View style={styles.container}>
       <Text>TODO</Text>
