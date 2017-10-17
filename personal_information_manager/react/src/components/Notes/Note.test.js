@@ -27,3 +27,4 @@ it('calls handler with correct id', () => {
 
 // React-modal uses portals, which are problematic at the current time
 // Enzyme does not funny support them, and mount fails
+// https://github.com/airbnb/enzyme/issues/1150
