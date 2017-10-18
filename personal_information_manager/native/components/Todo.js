@@ -105,7 +105,8 @@ class Todo extends Component {
         onChangeText={value => this.setState({value})}
         onSubmitEditing={this.handleSubmit}
         placeholder='Your todo here'
-        maxLength={75}/>
+        maxLength={75}
+        underlineColorAndroid='rgba(0,0,0,0)'/>
       <Button
         onPress={this.handleSubmit}
         title='Submit'
