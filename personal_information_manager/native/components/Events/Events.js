@@ -1,16 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import {Calendar} from 'react-native-calendars';
+import {styles} from './styles';
 
 const Events = () => {
-  const styles = StyleSheet.create({
-    h1: {
-      fontSize: 30,
-      fontWeight: '300',
-      marginBottom: 10,
-      textAlign: 'center'
-    }
-  });
   const calendar = <Calendar
     current={Date()}
     minDate={Date()}

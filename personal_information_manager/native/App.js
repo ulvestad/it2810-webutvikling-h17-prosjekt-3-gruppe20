@@ -1,21 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView, Platform} from 'react-native';
+import {Text, View, ScrollView, Platform} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import Notes from './components/Notes'
-import LogoBar from './components/LogoBar';
-import Todo from './components/Todo';
-import Events from './components/Events'
-
-/*Simple stylesheet for App-content*/
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
-    paddingLeft: 20,
-    paddingRight: 20
-  }
-});
+import LogoBar from './components/LogoBar/LogoBar';
+import Todo from './components/Todo/Todo';
+import Events from './components/Events/Events';
+import {styles} from './styles';
 
 /*Notes view with corresponding components*/
 const NotesScreen = () => (
@@ -27,7 +18,6 @@ const NotesScreen = () => (
     </ScrollView>
   </View>
 );
-
 
 /*Todo view with corresponding components*/
 const TodoScreen = () => (

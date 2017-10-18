@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, FlatList} from 'react-native';
+import {View, Text, TextInput, FlatList} from 'react-native';
 import {CheckBox, Button} from 'react-native-elements';
-import {storeItem, getTodos} from '../asyncStorage';
+import {storeItem, getTodos} from '../../asyncStorage';
+import {styles} from './styles';
 
 /**
  * Todo component. Add, complete or remove todos.
@@ -66,37 +67,6 @@ class Todo extends Component {
   render() {
     const {value, todos} = this.state;
 
-    const styles = StyleSheet.create({
-      h1: {
-        fontSize: 30,
-        fontWeight: '300',
-        marginBottom: 10,
-        textAlign: 'center'
-      },
-      h2: {
-        fontSize: 22,
-        fontWeight: '300',
-        marginTop: 20,
-        marginBottom: 20,
-        textAlign: 'center'
-      },
-      inputfield: {
-        borderColor: 'dodgerblue',
-        borderWidth: 1,
-        borderRadius: 3,
-        padding: 2,
-        margin: 15
-      },
-      line: {
-        borderBottomColor: '#000',
-        borderBottomWidth: 1
-      },
-      checkbox: {
-        flexDirection: 'row',
-        marginLeft: 6
-      }
-    });
-
     const inputForm = <View>
       <TextInput
         style={styles.inputfield}
@@ -115,9 +85,8 @@ class Todo extends Component {
       />
     </View>;
 
-    const list = <View>
-      {todos.length ? <Text style={styles.h2}>All of your todo’s:</Text> : null}
-      <FlatList data={todos} keyExtractor={(item, index) => index} renderItem={key =>
+    const list =
+      <FlatList style={styles.container} data={todos} keyExtractor={(item, index) => index} renderItem={key =>
         <View style={styles.checkbox} id={key.item.id} key={key.item.id}>
           <CheckBox
             containerStyle={{flex: 1}}
@@ -134,8 +103,7 @@ class Todo extends Component {
             borderRadius={3}
           />
         </View>}
-      />
-    </View>;
+      />;
 
     return (
       <View>
