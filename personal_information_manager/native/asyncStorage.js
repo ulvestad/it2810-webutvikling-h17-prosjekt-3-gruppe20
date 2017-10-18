@@ -1,3 +1,5 @@
+import {AsyncStorage} from 'react-native';
+
 /* Saves data to asyncstorage */
 export const storeItem = async (key, val) => {
   try {
