@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<section
+  id="notes"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-lg-8 mx-auto"
+      >
+        <h2>
+          Notes
+        </h2>
+        <blockquote
+          className="blockquote"
+        >
+          <p
+            className="mb-0"
+          >
+            He listens well who takes notes
+          </p>
+          <footer
+            className="blockquote-footer"
+          >
+            <cite>
+              Dante Alighieri
+            </cite>
+          </footer>
+        </blockquote>
+        <div
+          className="notesContainer"
+        >
+          <div
+            className="panel panel-default note add-note"
+            onClick={[Function]}
+          >
+            <div
+              className="panel-body"
+            >
+              <i
+                aria-hidden="true"
+                className="fa fa-plus add"
+              />
+            </div>
+          </div>
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
