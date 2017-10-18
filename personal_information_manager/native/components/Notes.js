@@ -22,7 +22,10 @@ class Notes extends Component {
   }
 
   componentWillMount() {
-    getNotes((res) => { this.setState({notes: res })})
+    getNotes((res) => { 
+      console.log('res:', res);
+      this.setState({notes: res });
+    })
   }
 
   handleNoteClick(note) {
@@ -72,7 +75,8 @@ class Notes extends Component {
     const page = () => { 
       switch(this.state.page) {
         case 'notesList': {
-          return <NotesList handleNoteClick={this.handleNoteClick} handleAddClick={this.showAddNote} notes={this.state.notes}/>;
+          console.log('Notes: ' + this.state.notes);
+          return <NotesList handleNoteClick={this.handleNoteClick} handleAddClick={this.showAddNote} notes={this.state.notes} />;
         }
         case 'addNote': {
           return <AddNote onSubmit={this.onSubmitNote} onDelete={this.onDelete} note={this.state.note}/>;
