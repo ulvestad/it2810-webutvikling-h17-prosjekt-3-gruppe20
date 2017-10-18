@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<section
+  id="todo"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="mx-auto col-lg-8"
+      >
+        <h2>
+          Todo
+        </h2>
+        <form
+          className="form-inline"
+          onSubmit={[Function]}
+        >
+          <div
+            className="form-group"
+          >
+            <span
+              className="rightMargin"
+            >
+              What to do:
+            </span>
+            <input
+              className="todoMargin form-control"
+              id="formInlineTodo"
+              maxLength="75"
+              onChange={[Function]}
+              placeholder="Your todo here"
+              type="text"
+              value=""
+            />
+            <button
+              className="btn btn-primary"
+              disabled={false}
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+        <div>
+          <div
+            className="list-group"
+          >
+            <div
+              className="box"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
