@@ -9,4 +9,4 @@ it2810-20.idi.ntnu.no:8083
 
 ### React Native
 
-Clone prosjektet og bruk Expo. Eller på nett https://goo.gl/exATXX
+Clone prosjektet og bruk Expo App. Prosjektet finnes også på nett https://goo.gl/exATXX
