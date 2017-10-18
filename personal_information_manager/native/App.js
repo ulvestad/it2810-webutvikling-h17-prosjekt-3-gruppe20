@@ -6,6 +6,7 @@ import LogoBar from './components/LogoBar';
 import Todo from './components/Todo';
 import Header from './components/Header';
 import Notifications from './components/Notifications';
+import Events from './components/Events'
 
 
 /*Simple stylesheet for App-content*/
@@ -56,6 +57,19 @@ const NotifierScreen = ({navigation}) => (
       </View>
     );
 
+  /*Calendar view with corresponding components*/
+  const EventsScreen = ({ navigation }) => (
+    <View style={{flex: 1}}>
+      <LogoBar/>
+      <ScrollView>
+        <View style={styles.container}>
+            <Events />
+        </View>
+      </ScrollView>
+    </View>
+  );
+
+
 /*Navigation options for the "Notifier" tab*/
 NotifierScreen.navigationOptions = {
   tabBarLabel: 'Notifier',
@@ -92,6 +106,18 @@ NotesScreen.navigationOptions = {
   ),
 };
 
+/*Navigation options for the "Calendar" tab*/
+EventsScreen.navigationOptions = {
+  tabBarLabel: 'Calendar',
+  tabBarIcon: ({ tintColor, focused }) => (
+    <Ionicons
+      name={focused ? 'ios-list-box' : 'ios-list-box-outline'}
+      size={26}
+      style={{color: focused ? '#0092ff' : '#9b9b9b'}}
+    />
+  ),
+};
+
 /*Routing using react-navigation*/
 const App = TabNavigator(
   {
@@ -106,6 +132,10 @@ const App = TabNavigator(
     Notes: {
       screen: NotesScreen,
       path: 'notes',
+    },
+    Calendar: {
+      screen: EventsScreen,
+      path: 'calendar',
     },
   },
   {
