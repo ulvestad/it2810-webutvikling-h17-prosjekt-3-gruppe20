@@ -2,6 +2,8 @@ import React from 'react';
 import {StyleSheet, Text, View, ScrollView, Platform} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import Notes from './components/Notes'
 import LogoBar from './components/LogoBar';
 import Todo from './components/Todo';
 import Events from './components/Events'
@@ -20,11 +22,12 @@ const NotesScreen = () => (
   <View style={{flex: 1}}>
     <ScrollView>
       <View style={styles.container}>
-        <Todo/>
+        <Notes />
       </View>
     </ScrollView>
   </View>
 );
+
 
 /*Todo view with corresponding components*/
 const TodoScreen = () => (

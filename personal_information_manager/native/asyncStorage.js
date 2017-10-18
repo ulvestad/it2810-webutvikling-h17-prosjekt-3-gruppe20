@@ -19,6 +19,6 @@ export const getTodos = (callback) => {
 }
 
 /* Returns the notes in asyncStorage*/
-export const getNotes = () => {
+export const getNotes = (callback) => {
   return loadFromAsyncStorage('notes', [], callback);
 }
