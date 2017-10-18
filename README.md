@@ -13,3 +13,10 @@ Bruk Expo appen og naviger til prosjektet [Expo.io](https://goo.gl/exATXX). Scan
 <br>
 <br>
 Eventuelt: Clone prosjektet. Kjør `npm start` og bruk Expo app. 
+<br>
+
+#### Appen [Screenshot]
+
+<br>
+<img src="https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-3-gruppe20/blob/master/personal_information_manager/native/img/app.png?raw=true" width="600" height="550" >
+
