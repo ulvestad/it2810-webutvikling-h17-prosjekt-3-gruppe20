@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with props 1`] = `
+<div
+  className="panel panel-default note"
+>
+  <div
+    className="panel-heading note-heading"
+  >
+    <button
+      aria-label="Close"
+      className="close"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+      >
+        ×
+      </span>
+    </button>
+    <h3
+      className="panel-title"
+    >
+      Title
+    </h3>
+  </div>
+  <div
+    className="panel-body"
+  >
+    <p>
+      This is the body
+    </p>
+  </div>
+</div>
+`;
+
+exports[`renders correctly without props 1`] = `
+<div
+  className="panel panel-default note"
+>
+  <div
+    className="panel-heading note-heading"
+  >
+    <button
+      aria-label="Close"
+      className="close"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        aria-hidden="true"
+      >
+        ×
+      </span>
+    </button>
+    <h3
+      className="panel-title"
+    />
+  </div>
+  <div
+    className="panel-body"
+  >
+    <p />
+  </div>
+</div>
+`;
