@@ -11,15 +11,11 @@ const Events = () => {
       textAlign: 'center'
     }
   });
-
   const calendar = <Calendar
     current={Date()}
     minDate={Date()}
-    onDayPress={(day) => {console.log('selected day', day)}}
-    monthFormat={'yyyy MM'}
-    onMonthChange={(month) => {console.log('month changed', month)}}
+    monthFormat={'MMMM yyyy'}
   />;
-
   return <View><Text style={styles.h1}>Calendar</Text>{calendar}</View>;
 };
 

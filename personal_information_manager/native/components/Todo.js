@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, FlatList} from 'react-native';
 import {CheckBox, Button} from 'react-native-elements';
-import PropTypes from 'prop-types';
 import {storeItem, getTodos} from '../asyncStorage';
 
 /**
@@ -105,12 +104,15 @@ class Todo extends Component {
         onChangeText={value => this.setState({value})}
         onSubmitEditing={this.handleSubmit}
         placeholder='Your todo here'
-        maxLength={75}/>
+        maxLength={75}
+        underlineColorAndroid='rgba(0,0,0,0)'
+      />
       <Button
         onPress={this.handleSubmit}
         title='Submit'
         backgroundColor='dodgerblue'
-        borderRadius={3}/>
+        borderRadius={3}
+      />
     </View>;
 
     const list = <View>
@@ -122,14 +124,17 @@ class Todo extends Component {
             title={key.item.value}
             checked={key.item.check}
             onPress={() => this.changeStorage(key.item.id)}
-            checkedColor='dodgerblue'/>
+            checkedColor='dodgerblue'
+          />
           <Button
             containerViewStyle={{alignSelf: 'center'}}
             onPress={() => this.removeStorageItem(key.item.id)}
             title='X'
             backgroundColor='dodgerblue'
-            borderRadius={3}/>
-        </View>}/>
+            borderRadius={3}
+          />
+        </View>}
+      />
     </View>;
 
     return (
@@ -139,10 +144,6 @@ class Todo extends Component {
       </View>
     );
   };
-};
-
-Todo.propTypes = {
-  todos: PropTypes.array
 };
 
 export default Todo;

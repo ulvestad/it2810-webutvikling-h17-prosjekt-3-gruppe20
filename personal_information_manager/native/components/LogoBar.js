@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, StatusBar, TouchableHighlight, Alert} from 'react-native';
+import {StyleSheet, View, Image, StatusBar} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     height: 35,
     marginTop: 5,
     marginBottom: -4,
-  },
+  }
 });
 
 const LogoBar = () => {
