@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { storeDummyItems } from '../../localStorage';
 
 //CSS imports
 import './App.css';
@@ -21,8 +20,6 @@ import Notifications from '../Notifications/Notifications.js';
 
 class App extends Component {
   render() {
-    // Only for filling localstorage with dummy data.
-    storeDummyItems();
     return (
       <div className="App">
         <Nav />
