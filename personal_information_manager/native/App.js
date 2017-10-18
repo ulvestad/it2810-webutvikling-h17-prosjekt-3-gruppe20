@@ -4,6 +4,7 @@ import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LogoBar from './components/LogoBar'
 import Todo from './components/Todo'
+import Notes from './components/Notes'
 import Header from './components/Header'
 import Notifications from './components/Notifications'
 
@@ -38,7 +39,7 @@ const NotifierScreen = ({navigation}) => (
         <LogoBar/>
         <ScrollView>
           <View style={styles.container}>
-              <Todo/>
+              <Notes />
           </View>
         </ScrollView>
       </View>
@@ -50,7 +51,7 @@ const NotifierScreen = ({navigation}) => (
         <LogoBar/>
         <ScrollView>
           <View style={styles.container}>
-              <Todo/>
+              <Todo />
           </View>
         </ScrollView>
       </View>
