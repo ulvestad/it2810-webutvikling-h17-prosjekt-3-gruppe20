@@ -1,5 +1,4 @@
 import {AsyncStorage} from 'react-native';
-import React from 'react'
 
 /* Saves data to asyncstorage */
 export const storeItem = (key, val) => {
