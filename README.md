@@ -9,4 +9,6 @@ it2810-20.idi.ntnu.no:8083
 
 ### React Native
 
-Clone prosjektet og bruk Expo App. Prosjektet finnes også på nett https://goo.gl/exATXX
+Bruk Expo appen og navigiger til https://goo.gl/exATXX. Scanner QR-koden for å åpne prosjektet. 
+<br>
+Eventuelt clone prosjektet. Kjør "npm start" og bruk Expo app. 
