@@ -8,7 +8,6 @@ export const storeItem = (key, val) => {
 /* Returns data from asyncstorage */
 export const loadFromAsyncStorage = (key, defaultValue, callback) => {
   AsyncStorage.getItem(key, (err, value) => {
-    console.log("loadFromAsyncStorage: ", value)
     if (err) return callback(defaultValue)
     return callback(JSON.parse(value))
   })
@@ -21,6 +20,5 @@ export const getTodos = (callback) => {
 
 /* Returns the notes in asyncStorage*/
 export const getNotes = (callback) => {
-  console.log('getting notes!');
   return loadFromAsyncStorage('notes', [], callback);
 }

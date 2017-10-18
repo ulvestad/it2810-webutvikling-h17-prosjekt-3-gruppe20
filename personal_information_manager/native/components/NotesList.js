@@ -7,7 +7,6 @@ class NotesList extends Component {
 
     this.handleNewNote = this.handleNewNote.bind(this);
     this.handleEditNote = this.handleEditNote.bind(this);
-    
   }
 
   handleNewNote(e) {
