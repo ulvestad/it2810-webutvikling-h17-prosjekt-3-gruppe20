@@ -1,42 +1,24 @@
+import {AsyncStorage} from 'react-native';
+
 /* Saves data to asyncstorage */
 export const storeItem = (key, val) => {
-  try {
-    AsyncStorage.setItem(key, JSON.stringify(val));
-  } catch (error) {
-    // Error saving data
-  }
+  AsyncStorage.setItem(key, JSON.stringify(val));
 }
+
 /* Returns data from asyncstorage */
-export const loadFromLocalStorage = (key, defaultValue) => {
-  try {
-    return AsyncStorage.getItem(JSON.parse([key]));
-  } catch (e) {
-    return defaultValue
-  }
+export const loadFromAsyncStorage = (key, defaultValue, callback) => {
+  AsyncStorage.getItem(key, (err, value) => {
+    if (err) return callback(defaultValue)
+    return callback(JSON.parse(value))
+  })
 }
 
-/* Filters to get todays notis */
-export const getNotis = () => {
-  const today = new Date().toDateString()
-  return getEvents().filter(d => d.start.toDateString() === today)
+/* Returns the todos in asyncStorage */
+export const getTodos = (callback) => {
+  return loadFromAsyncStorage('todos', [], callback);
 }
 
-/* Returns the todos in localstorage */
-export const getTodos = () => {
-  return loadFromLocalStorage('todos', [])
-}
-
-/* Returns the notes in localstorage*/
-export const getNotes = () => {
-  return loadFromLocalStorage('notes', []);
-}
-
-/* Is it the first visit of the day */
-export const isFirstVisitOfDay = () => {
-  const today = new Date().toDateString()
-  const lastVisit = loadFromLocalStorage('lastVisit')
-  storeItem('lastVisit', today)
-  return (lastVisit === today)
-    ? false
-    : true
+/* Returns the notes in asyncStorage*/
+export const getNotes = (callback) => {
+  return loadFromAsyncStorage('notes', [], callback);
 }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, Button, ScrollView} from 'react-native';
-import PropTypes from 'prop-types';
-import {storeItem, getTodos} from '../asyncStorage';
+import {View, Text, TextInput, FlatList} from 'react-native';
+import {CheckBox, Button} from 'react-native-elements';
+import {storeItem, getTodos} from '../../asyncStorage';
+import {styles} from './styles';
 
 /**
  * Todo component. Add, complete or remove todos.
@@ -10,7 +11,7 @@ class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: getTodos(),
+      todos: [],
       value: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,54 +60,58 @@ class Todo extends Component {
     });
   }
 
+  componentWillMount() {
+    getTodos((value) => { this.setState({todos: value })})
+  }
+
   render() {
     const {value, todos} = this.state;
 
-    const styles = StyleSheet.create({
-      container: {
-        backgroundColor: 'lightgrey',
-        padding: 10,
-        width: 400,
-        marginTop: 300
-      },
-      inputfield: {
-        borderColor: 'dodgerblue',
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 2
-      }
-    });
-
-    const inputForm = <View style={styles.container}>
-      <Text>What to do:</Text>
+    const inputForm = <View>
       <TextInput
         style={styles.inputfield}
         value={value}
         onChangeText={value => this.setState({value})}
         onSubmitEditing={this.handleSubmit}
-        placeholder="Your todo here"
-        maxLength={75}/>
-      <Button onPress={this.handleSubmit} title="Submit"/>
+        placeholder='Your todo here'
+        maxLength={75}
+        underlineColorAndroid='rgba(0,0,0,0)'
+      />
+      <Button
+        onPress={this.handleSubmit}
+        title='Submit'
+        backgroundColor='dodgerblue'
+        borderRadius={3}
+      />
     </View>;
 
-    const list = <View>
-      {todos.length ? <Text>All of your todo’s:</Text> : null}
-      <ScrollView>
-        {todos.map(key => <View id={key.id} key={key.id}>
-          <Text onClick={() => this.changeStorage(key.id)}>{key.value}</Text>
-          <Button onPress={() => this.removeStorageItem(key.id)} title="x"/>
-        </View>)}
-      </ScrollView>
-    </View>;
+    const list =
+      <FlatList style={styles.container} data={todos} keyExtractor={(item, index) => index} renderItem={key =>
+        <View style={styles.checkbox} id={key.item.id} key={key.item.id}>
+          <CheckBox
+            containerStyle={{flex: 1}}
+            title={key.item.value}
+            checked={key.item.check}
+            onPress={() => this.changeStorage(key.item.id)}
+            checkedColor='dodgerblue'
+          />
+          <Button
+            containerViewStyle={{alignSelf: 'center'}}
+            onPress={() => this.removeStorageItem(key.item.id)}
+            title='X'
+            backgroundColor='dodgerblue'
+            borderRadius={3}
+          />
+        </View>}
+      />;
 
     return (
-      <View>{inputForm}{list}</View>
+      <View>
+        <Text style={styles.h1}>Todo</Text>
+        <View>{inputForm}{list}</View>
+      </View>
     );
   };
-};
-
-Todo.propTypes = {
-  todos: PropTypes.array
 };
 
 export default Todo;

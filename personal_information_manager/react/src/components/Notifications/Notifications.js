@@ -20,24 +20,21 @@ class Notifications extends Component {
     return (
       <div>
         <Header />
-        <section id="notifications">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-8 mx-auto">
+        <section id='notifications'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-lg-8 mx-auto'>
                 <h2>Notfications</h2>
                 <kbd>{new Date().toDateString()}</kbd>
                 <ul>
                   {this.state.notis.map((e, i) => {
                     return (
-                      <li key={i}>
-                        <Link to="/calender">
-                          <span className="badge badge-danger" id="liBadge">
-                            {i + 1}
-                          </span>
-                          {e.title}
+                      <li key={e.id}>
+                        <Link to='/calender'>
+                          <span className='badge badge-danger' id='liBadge'>{i + 1}</span>{e.title}
                         </Link>
                       </li>
-                    );
+                    )
                   })}
                 </ul>
               </div>
