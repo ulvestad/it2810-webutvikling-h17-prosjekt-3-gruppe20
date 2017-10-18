@@ -35,23 +35,28 @@ class Notes extends Component {
   }
 
   onSubmitNote(note) {
-    const oldNotes = this.state.notes.filter(aNote => aNote.id !== note.id);
-    
-    this.setState({
-      note: '',
-      page: 'notesList',
-      notes: [note, ...oldNotes],
-    }, () => {
-      storeItem('notes', this.state.notes)
-    });
+    if (note && note.text != '') {
+      const oldNotes = this.state.notes.filter(aNote => aNote.id !== note.id);
+      
+      this.setState({
+        note: '',
+        page: 'notesList',
+        notes: [note, ...oldNotes],
+      }, () => {
+        storeItem('notes', this.state.notes)
+      });
+    } else {
+      this.setState({page: 'notesList'});
+    }
   }
 
   onDelete(id) {
     const filteredNotes = this.state.notes.filter(note => note.id !== id);
     
     this.setState({
+      page: 'notesList',
+      note: '',
       notes: filteredNotes,
-      page: 'notesList'
     }, () => {
       storeItem('notes', this.state.notes)
     });
@@ -63,6 +68,12 @@ class Notes extends Component {
 
   render() {
     const styles = {
+      h1: {
+        fontSize: 30,
+        fontWeight: '300',
+        marginBottom: 10,
+        textAlign: 'center'
+      },
       container: {
         flex: 1,
       },
@@ -89,6 +100,7 @@ class Notes extends Component {
 
     return (
       <View style={styles.container}>
+        <Text style={styles.h1}>Notes</Text>
         { page() }
       </View>
     );

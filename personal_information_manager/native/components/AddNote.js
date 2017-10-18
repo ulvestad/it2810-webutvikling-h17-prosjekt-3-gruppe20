@@ -58,7 +58,8 @@ class AddNote extends Component {
         }}
           flexDirection='row'>
           <Button title="Delete" onPress={this.handleDelete}/>
-          <Button title="Submit" onPress={this.handleSubmit}/>
+          <Button title="Submit"
+            onPress={this.handleSubmit} />
         </View>
 
         <View style={styles.inputContainer} keyboardShouldResistTap={true}>
@@ -67,7 +68,8 @@ class AddNote extends Component {
             value={this.state.text}
             autoFocus={true}
             multiline={true}
-            style={styles.inputField}/>
+            style={styles.inputField}
+            underlineColorAndroid='rgba(0,0,0,0)' />
         </View>
 
       </View>

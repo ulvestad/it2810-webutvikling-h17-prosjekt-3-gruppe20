@@ -40,27 +40,35 @@ class NotesList extends Component {
         margin: 20,
         padding: 5,
         backgroundColor: '#343A40',
+      },
+      h2: {
+        fontSize: 22,
+        fontWeight: '300',
+        marginTop: 20,
+        marginBottom: 20,
+        textAlign: 'center'
       }
     }
 
     
-    const notes = this.props.notes ? this.props.notes.map(note =>
+    const notes = this.props.notes.map(note =>
       <TouchableHighlight key={note.id} id={note.id} onPress={(e) => this.props.handleNoteClick(note)}> 
         <View  style={styles.note}>  
           <Text style={{fontSize: 20, color: '#fff',}}>
             { this.limitTest(note.text) }
           </Text>
         </View>
-      </TouchableHighlight>) : null;
+      </TouchableHighlight>);
 
+    const defaultMessage = <Text style={styles.h2}>Your notes will be shown here</Text>;
     return (
       <View>
         <View>
-            <Button title="+ New" onPress={(e) => this.props.handleAddClick()}/>
+            <Button title="Add note" onPress={(e) => this.props.handleAddClick()}/>
         </View>
     
         <View flexDirection='row' flexWrap='wrap' style={styles.notes}>
-            { notes }
+            { notes.length ? notes : defaultMessage }
         </View>
       </View>
     );
