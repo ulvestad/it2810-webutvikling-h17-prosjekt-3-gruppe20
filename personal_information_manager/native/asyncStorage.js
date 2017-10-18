@@ -8,7 +8,7 @@ export const storeItem = (key, val) => {
 /* Returns data from asyncstorage */
 export const loadFromAsyncStorage = (key, defaultValue, callback) => {
   AsyncStorage.getItem(key, (err, value) => {
-    if (err) return callback(defaultValue)
+    if (err || !value) return callback(defaultValue)
     return callback(JSON.parse(value))
   })
 }
