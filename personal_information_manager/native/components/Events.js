@@ -16,7 +16,7 @@ const Events = () => {
     current={Date()}
     minDate={Date()}
     onDayPress={(day) => {console.log('selected day', day)}}
-    monthFormat={'yyyy MM'}
+    monthFormat={'MMMM yyyy'}
     onMonthChange={(month) => {console.log('month changed', month)}}
   />;
 
