@@ -12,7 +12,7 @@ export const storeItem = async (key, val) => {
 /* Returns data from asyncstorage */
 export const loadFromAsyncStorage = async (key, defaultValue) => {
   try {
-    await JSON.parse(AsyncStorage.getItem(key));
+    return await JSON.parse(AsyncStorage.getItem(key));
   } catch (error) {
     // Error retrieving data
     return defaultValue;
