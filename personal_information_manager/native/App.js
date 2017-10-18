@@ -5,7 +5,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import LogoBar from './components/LogoBar';
 import Todo from './components/Todo';
 import Header from './components/Header';
-import Notifications from './components/Notifications';
 import Events from './components/Events'
 
 
@@ -15,72 +14,44 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingLeft: 20,
     paddingRight: 20
-  },
+  }
 });
 
-
-/*Notfication view with corresponding components*/
-const NotifierScreen = ({navigation}) => (
-    <View style={{flex: 1}}>
-      <LogoBar/>
-      <ScrollView>
-        <Header/>
-        <View style={styles.container}>
-          <Notifications/>
-        </View>
-      </ScrollView>
-    </View>
-  );
-
-
-  /*Notes view with corresponding components*/
-  const NotesScreen = ({ navigation }) => (
-      <View style={{flex: 1}}>
-        <LogoBar/>
-        <ScrollView>
-          <View style={styles.container}>
-              <Todo/>
-          </View>
-        </ScrollView>
+/*Notes view with corresponding components*/
+const NotesScreen = ({ navigation }) => (
+  <View style={{flex: 1}}>
+    <LogoBar/>
+    <ScrollView>
+      <View style={styles.container}>
+        <Todo/>
       </View>
-  );
+    </ScrollView>
+  </View>
+);
 
-  /*Todo view with corresponding components*/
-  const TodoScreen = ({ navigation }) => (
-      <View style={{flex: 1}}>
-        <LogoBar/>
-        <ScrollView>
-          <View style={styles.container}>
-              <Todo/>
-          </View>
-        </ScrollView>
+/*Todo view with corresponding components*/
+const TodoScreen = ({ navigation }) => (
+  <View style={{flex: 1}}>
+    <LogoBar/>
+    <ScrollView>
+      <View style={styles.container}>
+        <Todo/>
       </View>
-    );
+    </ScrollView>
+  </View>
+);
 
-  /*Calendar view with corresponding components*/
-  const EventsScreen = ({ navigation }) => (
-    <View style={{flex: 1}}>
-      <LogoBar/>
-      <ScrollView>
-        <View style={styles.container}>
-            <Events />
-        </View>
-      </ScrollView>
-    </View>
-  );
-
-
-/*Navigation options for the "Notifier" tab*/
-NotifierScreen.navigationOptions = {
-  tabBarLabel: 'Notifier',
-  tabBarIcon: ({ tintColor, focused }) => (
-    <Ionicons
-      name={focused ? 'ios-notifications' : 'ios-notifications-outline'}
-      size={26}
-      style={{ color: focused ? '#0092ff' : '#9b9b9b'}}
-    />
-  ),
-};
+/*Calendar view with corresponding components*/
+const EventsScreen = ({ navigation }) => (
+  <View style={{flex: 1}}>
+    <LogoBar/>
+    <ScrollView>
+      <View style={styles.container}>
+        <Events/>
+      </View>
+    </ScrollView>
+  </View>
+);
 
 /*Navigation options for the "Todo" tab*/
 TodoScreen.navigationOptions = {
@@ -91,7 +62,7 @@ TodoScreen.navigationOptions = {
       size={26}
       style={{color: focused ? '#0092ff' : '#9b9b9b'}}
     />
-  ),
+  )
 };
 
 /*Navigation options for the "Notes" tab*/
@@ -103,7 +74,7 @@ NotesScreen.navigationOptions = {
       size={26}
       style={{color: focused ? '#0092ff' : '#9b9b9b'}}
     />
-  ),
+  )
 };
 
 /*Navigation options for the "Calendar" tab*/
@@ -111,19 +82,19 @@ EventsScreen.navigationOptions = {
   tabBarLabel: 'Calendar',
   tabBarIcon: ({ tintColor, focused }) => (
     <Ionicons
-      name={focused ? 'ios-list-box' : 'ios-list-box-outline'}
+      name={focused ? 'ios-calendar' : 'ios-calendar-outline'}
       size={26}
       style={{color: focused ? '#0092ff' : '#9b9b9b'}}
     />
-  ),
+  )
 };
 
 /*Routing using react-navigation*/
 const App = TabNavigator(
   {
-    Notifier: {
-      screen: NotifierScreen,
-      path: '',
+    Calendar: {
+      screen: EventsScreen,
+      path: 'calendar',
     },
     Todo: {
       screen: TodoScreen,
@@ -132,21 +103,15 @@ const App = TabNavigator(
     Notes: {
       screen: NotesScreen,
       path: 'notes',
-    },
-    Calendar: {
-      screen: EventsScreen,
-      path: 'calendar',
-    },
+    }
   },
   {
     tabBarPosition: 'bottom',
     swipeEnabled: true,
     tabBarOptions: {
       activeTintColor: Platform.OS === 'ios' ? '#0092ff' : '#fff',
-      style: {
-        backgroundColor: '#343A40'
-      }
-    },
+      style: {backgroundColor: '#343A40'}
+    }
   }
 );
 
