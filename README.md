@@ -2,3 +2,11 @@
 
 Personal information manager -  en applikasjon som holder styr på avtaler, totater, varslinger, todo's etc. 
 Utviklet i React
+
+##React Web
+
+it2810-xx.idi.ntnu.no:8083
+
+##React Native
+
+Clone prosjektet og bruk Expo. Eller på nett https://goo.gl/exATXX
