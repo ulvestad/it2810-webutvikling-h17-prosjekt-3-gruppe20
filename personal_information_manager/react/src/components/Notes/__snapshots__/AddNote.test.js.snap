@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with props 1`] = `
+<div
+  className="panel panel-default note add-note"
+  onClick={[Function]}
+>
+  <div
+    className="panel-body"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-plus add"
+    />
+  </div>
+</div>
+`;
+
+exports[`renders correctly without props 1`] = `
+<div
+  className="panel panel-default note add-note"
+  onClick={undefined}
+>
+  <div
+    className="panel-body"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-plus add"
+    />
+  </div>
+</div>
+`;
