@@ -28,7 +28,7 @@ class NotesList extends Component {
   }
 
   render() {
-    const notes = this.props.notes.length ? null : this.props.notes.map(note =>
+    const notes = !this.props.notes.length ? null : this.props.notes.map(note =>
       <TouchableHighlight key={note.id} id={note.id} onPress={(e) => this.props.handleNoteClick(note)}>
         <View style={styles.note}>
           <Text style={{fontSize: 20, color: '#fff',}}>{this.limitTest(note.text)}</Text>
@@ -39,7 +39,7 @@ class NotesList extends Component {
     return (
       <View>
         <View><Button title="Add note" onPress={(e) => this.props.handleAddClick()}/></View>
-        {notes.length ? <View flexDirection='row' flexWrap='wrap' style={styles.notes}>{notes}</View> : defaultMessage}
+        {notes ? <View flexDirection='row' flexWrap='wrap' style={styles.notes}>{notes}</View> : defaultMessage}
       </View>
     );
   }
