@@ -12,4 +12,4 @@ it2810-20.idi.ntnu.no:8083
 Bruk Expo appen og navigiger til [Expo.io](https://goo.gl/exATXX). Scanner QR-koden for å åpne prosjektet. 
 <br>
 <br>
-Eventuelt clone prosjektet. Kjør 'npm start' og bruk Expo app. 
+Eventuelt clone prosjektet. Kjør `npm start` og bruk Expo app. 
