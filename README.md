@@ -5,7 +5,7 @@ Utviklet i React
 
 ### React Web
 
-it2810-20.idi.ntnu.no:8083
+http://it2810-20.idi.ntnu.no:8083/
 
 ### React Native
 
