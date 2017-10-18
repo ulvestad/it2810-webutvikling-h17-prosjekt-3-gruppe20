@@ -4,9 +4,7 @@ import {TabNavigator, StackNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LogoBar from './components/LogoBar';
 import Todo from './components/Todo';
-import Header from './components/Header';
 import Events from './components/Events'
-
 
 /*Simple stylesheet for App-content*/
 const styles = StyleSheet.create({
@@ -18,7 +16,7 @@ const styles = StyleSheet.create({
 });
 
 /*Notes view with corresponding components*/
-const NotesScreen = ({ navigation }) => (
+const NotesScreen = () => (
   <View style={{flex: 1}}>
     <ScrollView>
       <View style={styles.container}>
@@ -29,7 +27,7 @@ const NotesScreen = ({ navigation }) => (
 );
 
 /*Todo view with corresponding components*/
-const TodoScreen = ({ navigation }) => (
+const TodoScreen = () => (
   <View style={{flex: 1}}>
     <ScrollView>
       <View style={styles.container}>
@@ -40,7 +38,7 @@ const TodoScreen = ({ navigation }) => (
 );
 
 /*Calendar view with corresponding components*/
-const EventsScreen = ({ navigation }) => (
+const EventsScreen = () => (
   <View style={{flex: 1}}>
     <ScrollView>
       <View style={styles.container}>
