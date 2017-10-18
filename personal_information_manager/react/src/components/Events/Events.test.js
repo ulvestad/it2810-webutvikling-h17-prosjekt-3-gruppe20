@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import EventModal from './EventModal';
+import renderer from 'react-test-renderer';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
+const jestExpect = global.expect;
+
 it('renders without crashing', () => {
   shallow(<EventModal />);
+});
+
+it('renders correctly without props', () => {
+  const tree = renderer.create(<EventModal />).toJSON();
+  jestExpect(tree).toMatchSnapshot();
 });
 
 it('starts with empty intial data', () => {
