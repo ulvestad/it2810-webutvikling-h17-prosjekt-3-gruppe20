@@ -109,6 +109,8 @@ const App = TabNavigator(
     },
   },
   {
+    tabBarPosition: 'bottom',
+    swipeEnabled: true,
     tabBarOptions: {
       activeTintColor: Platform.OS === 'ios' ? '#0092ff' : '#fff',
       style: {
