@@ -9,7 +9,7 @@ http://it2810-20.idi.ntnu.no:8083/
 
 ### React Native
 
-Bruk Expo appen og navigiger til [Expo.io](https://goo.gl/exATXX). Scann QR-koden for å åpne prosjektet. 
+Bruk Expo appen og naviger til prosjektet [Expo.io](https://goo.gl/exATXX). Scann QR-koden for å åpne prosjektet. 
 <br>
 <br>
 Eventuelt: Clone prosjektet. Kjør `npm start` og bruk Expo app. 
