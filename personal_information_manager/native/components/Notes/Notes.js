@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, Button, ScrollView} from 'react-native';
-import PropTypes from 'prop-types';
+import {View, Text, TextInput, Button, ScrollView} from 'react-native';
 import NotesList from './NotesList';
 import AddNote from './AddNote';
-import {storeItem, getNotes} from '../asyncStorage';
+import {storeItem, getNotes} from '../../asyncStorage';
+import {styles} from './styles';
 
 class Notes extends Component {
   constructor(props){
@@ -33,7 +33,7 @@ class Notes extends Component {
   onSubmitNote(note) {
     if (note && note.text != '') {
       const oldNotes = this.state.notes.filter(aNote => aNote.id !== note.id);
-      
+
       this.setState({
         note: '',
         page: 'notesList',
@@ -48,7 +48,7 @@ class Notes extends Component {
 
   onDelete(id) {
     const filteredNotes = this.state.notes.filter(note => note.id !== id);
-    
+
     this.setState({
       page: 'notesList',
       note: '',
@@ -63,23 +63,7 @@ class Notes extends Component {
   }
 
   render() {
-    const styles = {
-      h1: {
-        fontSize: 30,
-        fontWeight: '300',
-        marginBottom: 10,
-        textAlign: 'center'
-      },
-      container: {
-        flex: 1,
-      },
-      noteContainer: {
-        padding: 10,
-        borderTopWidth: 1
-      }
-    };
-
-    const page = () => { 
+    const page = () => {
       switch(this.state.page) {
         case 'notesList': {
           return <NotesList handleNoteClick={this.handleNoteClick} handleAddClick={this.showAddNote} notes={this.state.notes} />;
@@ -91,7 +75,7 @@ class Notes extends Component {
           return <Text>Error</Text>;
         }
       };
-    }
+    };
 
     return (
       <View style={styles.container}>
@@ -100,6 +84,6 @@ class Notes extends Component {
       </View>
     );
   }
-}
+};
 
 export default Notes;

@@ -1,15 +1,8 @@
 import React, {Component} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Button,
-  ScrollView,
-  TouchableHighlight
-} from 'react-native';
+import {View, Text, TextInput, Button, ScrollView, TouchableHighlight} from 'react-native';
 import PropTypes from 'prop-types';
-import {storeItem, getNotes} from '../asyncStorage';
+import {storeItem, getNotes} from '../../asyncStorage';
+import {styles} from './styles';
 
 class AddNote extends Component {
   constructor(props) {
@@ -32,36 +25,16 @@ class AddNote extends Component {
   }
 
   handleDelete(e) {
-    console.log('delete note:' + this.state.id);
     this.props.onDelete(this.state.id);
   }
 
   render() {
-    const styles = {
-      container: {
-        flex: 1
-      },
-      inputContainer: {
-        flex: 1
-      },
-      inputField: {
-        fontSize: 20
-      }
-    };
-
     return (
       <View style={styles.container}>
-        <View
-          style={{
-          marginBottom: 10,
-          justifyContent: 'space-between'
-        }}
-          flexDirection='row'>
-          <Button title="Delete" onPress={this.handleDelete}/>
-          <Button title="Submit"
-            onPress={this.handleSubmit} />
+        <View style={{marginBottom: 10, justifyContent: 'space-between'}} flexDirection='row'>
+          <Button title='Delete' onPress={this.handleDelete}/>
+          <Button title='Submit' onPress={this.handleSubmit}/>
         </View>
-
         <View style={styles.inputContainer} keyboardShouldResistTap={true}>
           <TextInput
             onChangeText={(text) => this.setState({text})}
@@ -69,12 +42,21 @@ class AddNote extends Component {
             autoFocus={true}
             multiline={true}
             style={styles.inputField}
-            underlineColorAndroid='rgba(0,0,0,0)' />
+            underlineColorAndroid='rgba(0,0,0,0)'
+          />
         </View>
-
       </View>
     );
   }
-}
+};
+
+AddNote.propTypes = {
+  note: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  onSubmit: PropTypes.func,
+  onDelete: PropTypes.func
+};
 
 export default AddNote;

@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, ScrollView, Platform} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Notes from './components/Notes'
+import Notes from './components/Notes/Notes'
 import LogoBar from './components/LogoBar/LogoBar';
 import Todo from './components/Todo/Todo';
 import Events from './components/Events/Events';
