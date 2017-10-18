@@ -7,9 +7,7 @@ class Events extends Component{
     const calendar = <Calendar
       current={Date()}
       minDate={Date()}
-      onDayPress={(day) => {console.log('selected day', day)}}
       monthFormat={'yyyy MM'}
-      onMonthChange={(month) => {console.log('month changed', month)}}
     />;
     return (
       <View>{calendar}</View>
