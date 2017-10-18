@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View, ScrollView, Platform} from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import {TabNavigator} from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import LogoBar from './components/LogoBar'
-import Todo from './components/Todo'
-import Header from './components/Header'
-import Notifications from './components/Notifications'
+import LogoBar from './components/LogoBar';
+import Todo from './components/Todo';
+import Header from './components/Header';
+import Notifications from './components/Notifications';
 
 
 /*Simple stylesheet for App-content*/

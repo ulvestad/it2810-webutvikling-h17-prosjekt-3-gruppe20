@@ -1,17 +1,19 @@
 /* Saves data to asyncstorage */
-export const storeItem = (key, val) => {
+export const storeItem = async (key, val) => {
   try {
-    AsyncStorage.setItem(key, JSON.stringify(val));
+    await AsyncStorage.setItem(key, JSON.stringify(val));
   } catch (error) {
     // Error saving data
   }
 }
+
 /* Returns data from asyncstorage */
-export const loadFromLocalStorage = (key, defaultValue) => {
+export const loadFromAsyncStorage = async (key, defaultValue) => {
   try {
-    return AsyncStorage.getItem(JSON.parse([key]));
-  } catch (e) {
-    return defaultValue
+    await JSON.parse(AsyncStorage.getItem(key));
+  } catch (error) {
+    // Error retrieving data
+    return defaultValue;
   }
 }
 
@@ -21,20 +23,20 @@ export const getNotis = () => {
   return getEvents().filter(d => d.start.toDateString() === today)
 }
 
-/* Returns the todos in localstorage */
+/* Returns the todos in asyncStorage */
 export const getTodos = () => {
-  return loadFromLocalStorage('todos', [])
+  return loadFromAsyncStorage('todos', []);
 }
 
-/* Returns the notes in localstorage*/
+/* Returns the notes in asyncStorage*/
 export const getNotes = () => {
-  return loadFromLocalStorage('notes', []);
+  return loadFromAsyncStorage('notes', []);
 }
 
 /* Is it the first visit of the day */
 export const isFirstVisitOfDay = () => {
   const today = new Date().toDateString()
-  const lastVisit = loadFromLocalStorage('lastVisit')
+  const lastVisit = loadFromAsyncStorage('lastVisit')
   storeItem('lastVisit', today)
   return (lastVisit === today)
     ? false
