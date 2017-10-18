@@ -11,7 +11,7 @@ class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: getTodos(),
+      todos: [],
       value: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,8 +60,11 @@ class Todo extends Component {
     });
   }
 
+  componentWillMount() {
+    getTodos((value) => { this.setState({todos: value })})
+  }
 
- render() {
+  render() {
     const {value, todos} = this.state;
 
     const styles = StyleSheet.create({
