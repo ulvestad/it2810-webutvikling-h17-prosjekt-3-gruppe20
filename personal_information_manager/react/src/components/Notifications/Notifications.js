@@ -29,7 +29,7 @@ class Notifications extends Component {
               <ul>
                 {this.state.notis.map((e, i) => {
                   return (
-                    <li key={i}>
+                    <li key={e.id}>
                       <Link to='/calender'>
                         <span className='badge badge-danger' id='liBadge'>{i + 1}</span>{e.title}
                       </Link>
