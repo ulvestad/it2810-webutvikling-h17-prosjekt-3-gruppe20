@@ -9,32 +9,46 @@ class Notes extends Component {
   constructor(props){
     super(props);
 
-    //this.state = {notes: getNotes()};
     this.state = {
       page: 'notesList',
-      notes: [
-        {
-          id: 0,
-          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        }, 
-        {
-          id: 1,
-          text: "Note 2"
-        }, 
-        {
-          id: 3,
-          text: "Note 3"
-        }]
+      note: '',
+      notes: []
     };
 
     this.onSubmitNote = this.onSubmitNote.bind(this);
     this.showAddNote = this.showAddNote.bind(this);
+    this.handleNoteClick = this.handleNoteClick.bind(this);
+    this.onDelete = this.onDelete.bind(this);
+  }
+
+  componentWillMount() {
+    getNotes((res) => { this.setState({notes: res })})
+  }
+
+  handleNoteClick(note) {
+    console.log('handleNoteClick', note);
+    this.setState({note: note});
+    this.showAddNote()
   }
 
   onSubmitNote(note) {
+    const oldNotes = this.state.notes.filter(aNote => aNote.id !== note.id);
+    
     this.setState({
+      note: '',
       page: 'notesList',
-      notes: [note, ...this.state.notes],
+      notes: [note, ...oldNotes],
+    }, () => {
+      storeItem('notes', this.state.notes)
+    });
+  }
+
+  onDelete(id) {
+    const filteredNotes = this.state.notes.filter(note => note.id !== id);
+    
+    this.setState({
+      notes: filteredNotes,
+      page: 'notesList'
     }, () => {
       storeItem('notes', this.state.notes)
     });
@@ -57,9 +71,15 @@ class Notes extends Component {
 
     const page = () => { 
       switch(this.state.page) {
-        case 'notesList': return <NotesList onClick={this.showAddNote} notes={this.state.notes}/>;
-        case 'addNote': return <AddNote onSubmit={this.onSubmitNote} />;
-        default: return <Text>Error</Text>
+        case 'notesList': {
+          return <NotesList handleNoteClick={this.handleNoteClick} handleAddClick={this.showAddNote} notes={this.state.notes}/>;
+        }
+        case 'addNote': {
+          return <AddNote onSubmit={this.onSubmitNote} onDelete={this.onDelete} note={this.state.note}/>;
+        }
+        default: {
+          return <Text>Error</Text>;
+        }
       };
     }
 

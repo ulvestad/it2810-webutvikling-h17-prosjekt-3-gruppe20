@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, Button, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Button, ScrollView, TouchableHighlight} from 'react-native';
 
 class NotesList extends Component {
   constructor(props){
@@ -11,7 +11,7 @@ class NotesList extends Component {
   }
 
   handleNewNote(e) {
-    this.props.onClick();
+    this.props.handleAddClick();
   }
 
   handleEditNote(e) {
@@ -43,17 +43,19 @@ class NotesList extends Component {
       }
     }
 
-    const notes = this.props.notes.map(note => 
-      <View key={note.id} id={note.id} style={styles.note} onPress={this.handleEditNote}>  
-        <Text style={{fontSize: 20, color: '#fff',}}>
-          { this.limitTest(note.text) }
-        </Text>
-      </View>);
+    const notes = this.props.notes.map(note =>
+      <TouchableHighlight key={note.id} id={note.id} onPress={(e) => this.props.handleNoteClick(note)}> 
+        <View  style={styles.note}>  
+          <Text style={{fontSize: 20, color: '#fff',}}>
+            { this.limitTest(note.text) }
+          </Text>
+        </View>
+      </TouchableHighlight>);
 
     return (
       <View>
         <View>
-            <Button title="+ New" onPress={this.handleNewNote}/>
+            <Button title="+ New" onPress={(e) => this.props.handleAddClick()}/>
         </View>
     
         <View flexDirection='row' flexWrap='wrap' style={styles.notes}>
