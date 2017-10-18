@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <header
+    className="bg-primary text-white"
+    id="page-top"
+  >
+    <div
+      className="container text-center"
+    >
+      <h2>
+        Welcome to the Personal Information Manager
+      </h2>
+      <p
+        className="lead"
+      >
+        This page helps to keep your personal information organized in a practical way.
+      </p>
+    </div>
+  </header>
+  <section
+    id="notifications"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-lg-8 mx-auto"
+        >
+          <h2>
+            Notfications
+          </h2>
+          <kbd>
+            Wed Oct 18 2017
+          </kbd>
+          <ul />
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;
