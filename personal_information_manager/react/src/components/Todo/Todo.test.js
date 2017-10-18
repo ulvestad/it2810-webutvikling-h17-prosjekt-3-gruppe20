@@ -9,8 +9,15 @@ import Todo from './Todo';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Form from 'react-bootstrap/lib/Form';
 
+const jestExpect = global.expect;
+
 it('renders without crashing', () => {
   shallow(<Todo />);
+});
+
+it('renders correctly', () => {
+  const tree = renderer.create(<Todo />).toJSON();
+  jestExpect(tree).toMatchSnapshot();
 });
 
 it('calls submit handler when form submitted', () => {
